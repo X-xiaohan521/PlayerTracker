@@ -1,0 +1,13 @@
+name: PlayerTracker
+main: me.yourname.playertracker.PlayerTracker
+version: 1.0
+api-version: 1.19
+commands:
+  track:
+    description: 查询在线玩家的位置和状态
+    usage: /track [玩家名]
+    permission: playertracker.use
+permissions:
+  playertracker.use:
+    description: 允许玩家使用 /track
+    default: op
