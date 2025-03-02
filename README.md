@@ -58,6 +58,8 @@
 ## 💡 参与贡献
 ### 如果你想帮助改进这个插件，请通过 GitHub 提交 Issue 或 Pull Request。
 - 提交问题：[🔗 GitHub Issues](https://github.com/X-xiaohan521/PlayerTracker/issues)
+- 提交功能建议: [🔗 GitHub Issues](https://github.com/X-xiaohan521/PlayerTracker/issues)
+- 插件讨论：[🔗 discussions](https://github.com/X-xiaohan521/PlayerTracker/discussions/)
 - 提交代码：Fork 代码仓库并发起 [🔗 Pull Request](https://github.com/X-xiaohan521/PlayerTracker/pulls)
 
 ---
