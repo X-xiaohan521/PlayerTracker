@@ -1,5 +1,5 @@
 name: PlayerTracker
-main: me.yourname.playertracker.PlayerTracker
+main: UniMilk.playertracker.PlayerTracker
 version: 1.0
 api-version: 1.19
 commands:
@@ -7,7 +7,14 @@ commands:
     description: 查询在线玩家的位置和状态
     usage: /track [玩家名]
     permission: playertracker.use
+  tracklog:
+    description: 开启/关闭玩家状态日志
+    usage: /tracklog [on|off]
+    permission: playertracker.admin
 permissions:
+  playertracker.admin:
+    description: 允许管理员修改插件配置
+    default: op
   playertracker.use:
-    description: 允许玩家使用 /track
+    description: 允许玩家使用 /track 命令
     default: op
