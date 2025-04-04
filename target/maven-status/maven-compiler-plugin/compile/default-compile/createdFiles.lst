@@ -1,2 +1,3 @@
-me\yourname\playertracker\PlayerTracker.class
 com\example\playertracker\App.class
+UniMilk\playertracker\PlayerTracker.class
+UniMilk\playertracker\PlayerTracker$PlayerListener.class
