@@ -29,7 +29,7 @@
 | `/track <player>` | 查询指定玩家坐标及状态  | `playertracker.use` |
 | `/tracklog <on/off>` | 开启/关闭日志记录  | `playertracker.admin` |
 
-
+### 🔹 配置文件 `config.yml`
 
 ---
 
