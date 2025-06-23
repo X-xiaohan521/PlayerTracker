@@ -24,13 +24,22 @@ public class PlayerStatusUtils {
         return "闲逛";
     }
 
+    public static String getCoords(Player player) {
+        // 获取玩家坐标函数
+        Location loc = player.getLocation();
+        int x = loc.getBlockX(); // 获取玩家所在世界的X坐标
+        int y = loc.getBlockY(); // 获取玩家所在世界的Y坐标
+        int z = loc.getBlockZ(); // 获取玩家所在世界的Z坐标
+        return String.format("%s %s %s", x, y, z);
+    }
+
     public static void sendPlayerInfo(CommandSender sender, Player player) {
         // 发送玩家信息函数
         Location loc = player.getLocation();
         String activity = getStatus(player);
         String worldName = loc.getWorld().getName();
-        String coords = String.format("%s %s %s", loc.getX(), loc.getY(), loc.getZ());
-
+        String coords = getCoords(player);
+        
         // 主信息组件
         TextComponent message = new TextComponent(ChatColor.GREEN + player.getName() + ChatColor.YELLOW + " - 世界: " + ChatColor.AQUA + worldName + ChatColor.YELLOW + " - 坐标: ");
 
