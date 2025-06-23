@@ -1,4 +1,4 @@
-package UniMilk.playertracker;
+package UniMilk.PlayerTracker;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -190,6 +190,27 @@ public class PlayerTracker extends JavaPlugin implements CommandExecutor, Listen
 
     private class PlayerListener implements Listener {
         // 事件监听器类，用于处理玩家活动事件
+        @EventHandler
+        public void onPlayerJoin(org.bukkit.event.player.PlayerJoinEvent event) {
+            // 玩家加入游戏事件处理
+            Player player = event.getPlayer();
+            logPlayerActivity(player, "加入游戏");
+        }
+
+        @EventHandler
+        public void onPlayerQuit(org.bukkit.event.player.PlayerQuitEvent event) {
+            // 玩家离开游戏事件处理
+            Player player = event.getPlayer();
+            logPlayerActivity(player, "离开游戏");
+        }
+
+        @EventHandler
+        public void onPlayerDie(org.bukkit.event.entity.PlayerDeathEvent event) {
+            // 玩家死亡事件处理
+            Player player = event.getEntity();
+            logPlayerActivity(player, "死亡");
+        }
+        
         @EventHandler
         public void onPlayerToggleFlight(PlayerToggleFlightEvent event) {
             // 玩家切换飞行状态事件处理

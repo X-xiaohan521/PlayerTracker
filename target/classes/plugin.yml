@@ -1,5 +1,5 @@
 name: PlayerTracker
-main: UniMilk.playertracker.PlayerTracker
+main: UniMilk.PlayerTracker
 version: 2.1.0
 api-version: 1.19
 commands:
