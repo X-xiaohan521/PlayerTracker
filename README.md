@@ -3,7 +3,7 @@
 
 🚀 **PlayerTracker** is an esay-to-use plugin for **1.19.1 Minecraft servers**. Server ops are able to get to know **the coordinary and status** of online players.
 
-📌 **当前版本：`v2.1.0`**  
+📌 **当前版本：`v2.2.0`**  
 📌 **兼容 Minecraft 版本：`1.19.1`**  
 📌 **支持服务端：`Spigot` `Paper`**
 
@@ -67,14 +67,12 @@ log:
 
 ## 📜 更新日志
 > 📌此处只显示最新版本，更早版本详见 `CHANGELOG.md`
-### [2.1.0] - 2025-06-23
+### [2.2.0] - 2025-06-23
 ### 🆕 新增
-- 添加的监听：玩家加入/离开游戏、玩家死亡
+- 点击坐标复制到剪贴板功能
 
 ### 🌟 优化
-- 优化了日志格式为 `时间 玩家名 位置【世界+坐标】 事件`，使其便于阅读和复制
-- 重构插件架构，便于后续开发
-- 对活动进行分类（长时/瞬时）：`activity` 下包含 `status` 和 `event`
+- 
 ---
 
 ## 💡 参与贡献
