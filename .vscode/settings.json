@@ -3,6 +3,9 @@
         "bukkit",
         "playertracker",
         "tracklog",
-        "unimilk"
+        "unimilk",
+        "spigotmc",
+        "esay",
+        "coordinary"
     ]
 }
