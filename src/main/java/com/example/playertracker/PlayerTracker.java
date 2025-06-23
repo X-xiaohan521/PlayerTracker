@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -146,8 +147,10 @@ public class PlayerTracker extends JavaPlugin implements CommandExecutor, Listen
         // 获取当前时间并格式化
         String timeStamp = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
 
-        // 构建日志
-        String logMessage = String.format("[%s] [%s] %s: %s", timeStamp, player.getName(), player.getLocation().toString(), activity); // 日志格式
+        // 构建日志（格式：时间 玩家名 位置【世界+坐标】 事件）
+        String worldName = player.getWorld().getName();
+        Vector location = player.getLocation().toVector();
+        String logMessage = String.format("[%s] [%s] [%s] [%s] [%s]", timeStamp, player.getName(), worldName, location, activity); // 日志格式
         File logFile = new File(getDataFolder(), "player_activities.log"); // 日志文件路径
 
         // 使用 try-catch 块处理 IOException 异常
