@@ -7,6 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import unimilk.playertracker.util.PlayerStatusUtils;
+
 public class ActivityLogger {
     private final JavaPlugin plugin; // 定义插件实例
     private final File logFile; // 定义日志文件实例
@@ -26,10 +28,8 @@ public class ActivityLogger {
 
         // 构建日志（格式：时间 玩家名 位置【世界+坐标】 事件）
         String worldName = player.getWorld().getName();
-        int x = player.getLocation().getBlockX(); // 获取玩家所在世界的X坐标
-        int y = player.getLocation().getBlockY(); // 获取玩家所在世界的Y坐标
-        int z = player.getLocation().getBlockZ(); // 获取玩家所在世界的Z坐标
-        String logMessage = String.format("[%s] [%s] [%s] [%s %s %s] [%s]", timeStamp, player.getName(), worldName, x, y, z, activity); // 日志格式
+        String coords = PlayerStatusUtils.getCoords(player); // 获取玩家坐标
+        String logMessage = String.format("[%s] [%s] [%s] [%s] [%s]", timeStamp, player.getName(), worldName, coords, activity); // 日志格式
 
         // 使用 try-catch 块处理 IOException 异常
         try (FileWriter writer = new FileWriter(logFile, true)) { // 使用 try-with-resources 自动关闭资源
