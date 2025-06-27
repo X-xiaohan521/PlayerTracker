@@ -41,7 +41,8 @@ public class PlayerStatusUtils {
         String coords = getCoords(player);
         
         // 主信息组件
-        TextComponent message = new TextComponent(ChatColor.GREEN + player.getName() + ChatColor.YELLOW + " - 世界: " + ChatColor.AQUA + worldName + ChatColor.YELLOW + " - 坐标: [");
+        TextComponent message = new TextComponent(
+            ChatColor.GREEN + player.getName() + ChatColor.YELLOW + " - 世界: " + ChatColor.AQUA + worldName + ChatColor.YELLOW + " - 坐标: [");
 
         // 可点击的坐标组件
         TextComponent coordComponent = new TextComponent(ChatColor.AQUA + coords);
