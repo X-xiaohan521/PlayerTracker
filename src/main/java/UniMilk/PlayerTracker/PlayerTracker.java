@@ -113,7 +113,7 @@ public class PlayerTracker extends JavaPlugin {
                 return true;
             } else if (args[0].equalsIgnoreCase("stop")) {
                 // 如果参数为 "stop" ，从 trackingMap 中删除追踪映射
-                Player removedPlayer = viewer.trackingMap.remove(sender);
+                Player removedPlayer = viewer.removeTracker((Player) sender);
                 if (removedPlayer != null) {
                     sender.sendMessage(ChatColor.YELLOW + "已停止追踪玩家 " + ChatColor.GREEN + removedPlayer.getName() + ChatColor.YELLOW + " 的坐标。");
                 } else {
@@ -124,7 +124,7 @@ public class PlayerTracker extends JavaPlugin {
                 // 其他情况，认为参数为玩家名，向 trackingMap 中添加追踪映射
                 Player target = Bukkit.getPlayer(args[0]);
                 if (target != null) {
-                    viewer.trackingMap.put((Player) sender, target);
+                    viewer.addTracker((Player) sender, target);
                 } else {
                     // 找不到玩家，报错
                     sender.sendMessage(ChatColor.RED + "玩家 " + args[0] + " 不在线或不存在！");
