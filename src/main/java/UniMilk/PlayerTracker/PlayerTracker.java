@@ -12,11 +12,13 @@ import net.md_5.bungee.api.ChatColor;
 import unimilk.playertracker.log.*;
 import unimilk.playertracker.listener.EventListener;
 import unimilk.playertracker.util.PlayerStatusUtils;
+import unimilk.playertracker.viewer.TrackViewer;
 
 public class PlayerTracker extends JavaPlugin {
 
     private FileConfiguration config; // 初始化配置文件对象
     private ActivityLogger logger; // 初始化活动记录器对象
+    private TrackViewer viewer; // 初始化追踪器对象
 
     @Override
     public void onEnable() {
@@ -30,6 +32,9 @@ public class PlayerTracker extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new EventListener(logger), this); // 注册事件监听器
         
+        viewer = new TrackViewer(this); // 创建跟踪器实例
+        viewer.startTrackingLoop(); // 启动跟踪循环
+
         getLogger().info("PlayerTracker 插件加载完毕！");
     }
 
@@ -72,7 +77,7 @@ public class PlayerTracker extends JavaPlugin {
 
             // 如果没有参数，显示当前日志记录状态
             if (args.length == 0) {
-                sender.sendMessage( "日志记录状态： " + (config.getBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
+                sender.sendMessage(ChatColor.YELLOW + "日志记录状态： " + (config.getBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
                 return true;
             }
             
@@ -80,16 +85,54 @@ public class PlayerTracker extends JavaPlugin {
             if (args[0].equalsIgnoreCase("on")) {
                 config.set("log.enabled", true);
                 saveConfig();
-                sender.sendMessage(ChatColor.GREEN + "日志记录已启用！");
+                sender.sendMessage(ChatColor.YELLOW + "日志记录状态： " + (config.getBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
             } else if (args[0].equalsIgnoreCase("off")) {
                 config.set("log.enabled", false);
                 saveConfig();
-                sender.sendMessage(ChatColor.RED + "日志记录已禁用！");
+                sender.sendMessage(ChatColor.YELLOW + "日志记录状态： " + (config.getBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
             } else {
                 sender.sendMessage(ChatColor.RED + "用法: /tracklog <on|off>");
             }
             return true;
         }
+
+        // 处理 `/trackview` 命令
+        if (command.getName().equalsIgnoreCase("trackview")) {
+            // 控制台不能使用 /trackview 命令
+            if (sender instanceof org.bukkit.command.ConsoleCommandSender) {
+                sender.sendMessage(ChatColor.RED + "该指令只能由玩家使用！");
+                return true;
+            } else if (!sender.hasPermission("playertracker.view")) {
+                sender.sendMessage(ChatColor.RED + "你没有权限使用此命令！");
+                return true;
+            }
+
+            if (args.length == 0) {
+                // 如果没有参数，显示正确用法
+                sender.sendMessage(ChatColor.RED + "用法: /trackview <玩家名|stop>");
+                return true;
+            } else if (args[0].equalsIgnoreCase("stop")) {
+                // 如果参数为 "stop" ，从 trackingMap 中删除追踪映射
+                Player removedPlayer = viewer.removeTracker((Player) sender);
+                if (removedPlayer != null) {
+                    sender.sendMessage(ChatColor.YELLOW + "已停止追踪玩家 " + ChatColor.GREEN + removedPlayer.getName() + ChatColor.YELLOW + " 的坐标。");
+                } else {
+                    sender.sendMessage(ChatColor.RED + "你没有在追踪任何玩家。");
+                }
+                return true;
+            } else {
+                // 其他情况，认为参数为玩家名，向 trackingMap 中添加追踪映射
+                Player target = Bukkit.getPlayer(args[0]);
+                if (target != null) {
+                    viewer.addTracker((Player) sender, target);
+                } else {
+                    // 找不到玩家，报错
+                    sender.sendMessage(ChatColor.RED + "玩家 " + args[0] + " 不在线或不存在！");
+                }
+                return true;
+            }
+        }
+
         return false; // 如果命令不匹配，返回 false
     }
 
