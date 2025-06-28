@@ -77,7 +77,7 @@ public class PlayerTracker extends JavaPlugin {
 
             // 如果没有参数，显示当前日志记录状态
             if (args.length == 0) {
-                sender.sendMessage( "日志记录状态： " + (config.getBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
+                sender.sendMessage(ChatColor.YELLOW + "日志记录状态： " + (config.getBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
                 return true;
             }
             
@@ -85,11 +85,11 @@ public class PlayerTracker extends JavaPlugin {
             if (args[0].equalsIgnoreCase("on")) {
                 config.set("log.enabled", true);
                 saveConfig();
-                sender.sendMessage(ChatColor.GREEN + "日志记录已启用！");
+                sender.sendMessage(ChatColor.YELLOW + "日志记录状态： " + (config.getBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
             } else if (args[0].equalsIgnoreCase("off")) {
                 config.set("log.enabled", false);
                 saveConfig();
-                sender.sendMessage(ChatColor.RED + "日志记录已禁用！");
+                sender.sendMessage(ChatColor.YELLOW + "日志记录状态： " + (config.getBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
             } else {
                 sender.sendMessage(ChatColor.RED + "用法: /tracklog <on|off>");
             }
