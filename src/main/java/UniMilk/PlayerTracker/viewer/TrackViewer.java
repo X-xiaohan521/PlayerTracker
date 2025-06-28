@@ -15,11 +15,11 @@ import net.md_5.bungee.api.ChatColor;
 public class TrackViewer {
     // 追踪查看器类，用于实时跟踪目标状态，并显示在追踪者游戏画面上
     private final JavaPlugin plugin;
-    private final Map<Player, Player> trackingMap = new HashMap<>(); // 用于存储追踪者和目标玩家之间的映射
+    public Map<Player, Player> trackingMap = new HashMap<>(); // 用于存储追踪者和目标玩家之间的映射
 
     public TrackViewer(JavaPlugin plugin) {
+        // 构造函数，接收插件实例
         this.plugin = plugin; // 初始化插件实例
-        startTrackingLoop(); // 启动跟踪循环
     }
 
     public static void viewPlayerInfo(Player tracker, Player target) {
@@ -39,7 +39,7 @@ public class TrackViewer {
         ));
     }
 
-    private void startTrackingLoop() {
+    public void startTrackingLoop() {
         // 定时任务，每秒更新一次追踪状态
         plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
             for (Map.Entry<Player, Player> entry : trackingMap.entrySet()) {
@@ -48,7 +48,7 @@ public class TrackViewer {
 
                 if (tracker.isOnline() && target.isOnline()) {
                     // 如果追踪者和目标玩家都在线，发送目标玩家信息
-                    PlayerStatusUtils.sendPlayerInfo(tracker, target);
+                    viewPlayerInfo(tracker, target);
                 }
                 else if (tracker.isOnline()) {
                     // 如果目标玩家不在线，显示错误消息
