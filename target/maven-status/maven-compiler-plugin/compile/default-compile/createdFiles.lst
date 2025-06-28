@@ -1,5 +1,6 @@
 unimilk\playertracker\listener\EventListener.class
 com\example\playertracker\App.class
+unimilk\playertracker\viewer\TrackViewer.class
 unimilk\playertracker\PlayerTracker.class
 unimilk\playertracker\log\ActivityLogger.class
 unimilk\playertracker\util\PlayerStatusUtils.class
