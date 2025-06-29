@@ -8,5 +8,6 @@
         "tracklog",
         "trackview",
         "unimilk"
-    ]
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
 }

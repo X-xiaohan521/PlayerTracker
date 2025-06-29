@@ -44,7 +44,7 @@ public class ActivityLogger {
         int logInterval = plugin.getConfig().getInt("log.schedule", 300); // 获取日志记录间隔，默认为300秒
         plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
-                String activity = unimilk.playertracker.util.PlayerStatusUtils.getStatus(player); // 获取玩家活动状态
+                String activity = PlayerStatusUtils.getStatus(player); // 获取玩家活动状态
                 log(player, activity); // 记录日志
             }
         }, 0L, logInterval * 20L); // 每隔指定时间记录一次活动
