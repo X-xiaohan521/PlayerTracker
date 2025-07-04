@@ -5,20 +5,10 @@ authors:
 version: 3.1.0
 api-version: 1.19
 commands:
-  track:
-    description: 查询在线玩家的位置和状态
-    usage: /track [玩家名]
+  playertracker:
+    description: playertracker插件主命令
+    usage: /playertracker <subcommands>
     permission: playertracker.use
-  
-  trackview:
-    description: 实时显示指定玩家的坐标
-    usage: /trackview [玩家名|stop]
-    permission: playertracker.view
-  
-  tracklog:
-    description: 开启/关闭玩家状态日志
-    usage: /tracklog [on|off]
-    permission: playertracker.admin
 permissions:
   playertracker.admin:
     description: 允许管理员修改插件配置
