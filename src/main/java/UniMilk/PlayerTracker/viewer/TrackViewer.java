@@ -1,8 +1,8 @@
 package unimilk.playertracker.viewer;
 
+import unimilk.playertracker.PlayerTracker;
 import unimilk.playertracker.util.PlayerStatusUtils;
 
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -17,10 +17,10 @@ import net.md_5.bungee.api.ChatColor;
 
 public class TrackViewer {
     // 追踪查看器类，用于实时跟踪目标状态，并显示在追踪者游戏画面上
-    private final JavaPlugin plugin;
+    private final PlayerTracker plugin;
     private Map<Player, Player> trackingMap = new HashMap<>(); // 用于存储追踪者和目标玩家之间的映射
 
-    public TrackViewer(JavaPlugin plugin) {
+    public TrackViewer(PlayerTracker plugin) {
         // 构造函数，接收插件实例
         this.plugin = plugin; // 初始化插件实例
     }

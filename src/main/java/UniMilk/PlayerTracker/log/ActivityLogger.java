@@ -5,15 +5,15 @@ import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
+import unimilk.playertracker.PlayerTracker;
 import unimilk.playertracker.util.PlayerStatusUtils;
 
 public class ActivityLogger {
-    private final JavaPlugin plugin; // 定义插件实例
+    private final PlayerTracker plugin; // 定义插件实例
     private final File logFile; // 定义日志文件实例
 
-    public ActivityLogger(JavaPlugin plugin) {
+    public ActivityLogger(PlayerTracker plugin) {
         // 构造函数，接收插件实例
         this.plugin = plugin; // 初始化插件实例
         this.logFile = new File(plugin.getDataFolder(), "player_activities.log"); // 日志文件路径
