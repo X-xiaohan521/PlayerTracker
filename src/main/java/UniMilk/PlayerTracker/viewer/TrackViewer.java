@@ -9,7 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 import net.md_5.bungee.api.ChatColor;
 
 public class TrackViewer {
@@ -39,14 +42,26 @@ public class TrackViewer {
         String worldName = target.getWorld().getName(); // 获取目标玩家所在世界名称
         String coords = PlayerStatusUtils.getCoords(target); // 获取目标玩家坐标
         String activity = PlayerStatusUtils.getStatus(target); // 获取目标玩家当前活动状态
-        
-        // 发送到追踪者的游戏画面上
-        tracker.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
+
+        // 构建信息
+        // 主信息组件
+        TextComponent message = new TextComponent(
             ChatColor.YELLOW + "正在追踪: " + ChatColor.GREEN + target.getName() +
             ChatColor.YELLOW + " - 世界: " + ChatColor.AQUA + worldName +
-            ChatColor.YELLOW + " - 坐标: [" + ChatColor.AQUA + coords +
-            ChatColor.YELLOW + "] - 当前状态: " + ChatColor.LIGHT_PURPLE + activity
-        ));
+            ChatColor.YELLOW + " - 坐标: [");
+        
+        // 可点击的坐标组件
+        TextComponent coordComponent = new TextComponent(ChatColor.AQUA + coords);
+        coordComponent.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, coords));
+        coordComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("点击复制坐标")));
+        message.addExtra(coordComponent);
+
+        // 当前状态信息
+        TextComponent activityComponent = new TextComponent(ChatColor.YELLOW + "] - 当前状态: " + ChatColor.LIGHT_PURPLE + activity);
+        message.addExtra(activityComponent);
+
+        // 发送到追踪者的游戏画面上
+        tracker.spigot().sendMessage(ChatMessageType.ACTION_BAR, message);
     }
 
     public void startTrackingLoop() {
