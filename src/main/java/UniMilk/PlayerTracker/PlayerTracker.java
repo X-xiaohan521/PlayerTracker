@@ -9,8 +9,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import net.md_5.bungee.api.ChatColor;
 
+import unimilk.playertracker.command.CommandHandler;
 import unimilk.playertracker.log.*;
-import unimilk.playertracker.listener.EventListener;
 import unimilk.playertracker.util.PlayerStatusUtils;
 import unimilk.playertracker.viewer.TrackViewer;
 
@@ -19,53 +19,35 @@ public class PlayerTracker extends JavaPlugin {
     private FileConfiguration config; // 初始化配置文件对象
     private ActivityLogger logger; // 初始化活动记录器对象
     private TrackViewer viewer; // 初始化追踪器对象
+    private CommandHandler commandHandler; // 初始化命令处理器对象
 
     @Override
     public void onEnable() {
         // 插件加载时的初始化逻辑
         getLogger().info("PlayerTracker 插件正在加载...");
         
-        loadConfig(); // 加载配置文件
+        // 加载配置文件
+        loadConfig();
         
+        // 加载活动记录器
         logger = new ActivityLogger(this); // 创建活动记录器实例
         logger.scheduleLogging(); // 启动定时记录任务
-
         getServer().getPluginManager().registerEvents(new EventListener(logger), this); // 注册事件监听器
         
+        // 加载追踪器
         viewer = new TrackViewer(this); // 创建跟踪器实例
         viewer.startTrackingLoop(); // 启动跟踪循环
+
+        // 加载命令处理器
+        commandHandler = new CommandHandler(this); // 创建命令处理器实例
+        this.getCommand("playertracker").setExecutor(commandHandler); // 注册命令处理器
 
         getLogger().info("PlayerTracker 插件加载完毕！");
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        // 处理 `/track` 命令
-        if (command.getName().equalsIgnoreCase("track")) {
-            // 检查是否有权限使用 /track 命令
-            if (!sender.hasPermission("playertracker.use") && !(sender instanceof org.bukkit.command.ConsoleCommandSender)) {
-                sender.sendMessage(ChatColor.RED + "你没有权限使用此命令！");
-                return true;
-            }
-            
-            // 如果有权限，继续执行命令
-            if (args.length == 0) {
-                // 没有参数时，查询所有在线玩家
-                sender.sendMessage(ChatColor.GOLD + "===== 在线玩家信息 =====");
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    PlayerStatusUtils.sendPlayerInfo(sender, player);
-                }
-            } else {
-                // 有参数时，查询特定玩家
-                Player target = Bukkit.getPlayer(args[0]);
-                if (target == null) {
-                    sender.sendMessage(ChatColor.RED + "玩家 " + args[0] + " 不在线或不存在！");
-                } else {
-                    PlayerStatusUtils.sendPlayerInfo(sender, target);
-                }
-            }
-            return true;
-        }
+        
         
         // 处理 `/tracklog` 命令
         if (command.getName().equalsIgnoreCase("tracklog")) {
