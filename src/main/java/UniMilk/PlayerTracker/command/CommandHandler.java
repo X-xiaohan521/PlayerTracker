@@ -66,7 +66,7 @@ public class CommandHandler implements CommandExecutor{
             // 有参数时，查询特定玩家
             Player target = Bukkit.getPlayer(args[1]);
             if (target == null) {
-                sender.sendMessage(ChatColor.RED + "玩家 " + args[0] + " 不在线或不存在！");
+                sender.sendMessage(ChatColor.RED + "玩家 " + args[1] + " 不在线或不存在！");
             } else {
                 PlayerStatusUtils.sendPlayerInfo(sender, target);
             }
@@ -94,7 +94,7 @@ public class CommandHandler implements CommandExecutor{
             // 如果参数为 "remove" ，从 trackingMap 中删除追踪映射
             Player removedPlayer = plugin.viewer.removeTracker((Player) sender);
             if (removedPlayer != null) {
-                sender.sendMessage(ChatColor.YELLOW + "已停止追踪玩家 " + ChatColor.GREEN + removedPlayer.getName() + ChatColor.YELLOW + " 的坐标。");
+                sender.sendMessage(ChatColor.YELLOW + "已停止追踪玩家 " + ChatColor.GREEN + removedPlayer.getName() + ChatColor.YELLOW + " 。");
             } else {
                 sender.sendMessage(ChatColor.RED + "你没有在追踪任何玩家。");
             }
@@ -104,6 +104,7 @@ public class CommandHandler implements CommandExecutor{
             Player target = Bukkit.getPlayer(args[2]);
             if (target != null) {
                 plugin.viewer.addTracker((Player) sender, target);
+                sender.sendMessage(ChatColor.YELLOW + "开始追踪玩家" + ChatColor.GREEN + target.getName() + ChatColor.YELLOW + "。");
             } else {
                 // 找不到玩家，报错
                 sender.sendMessage(ChatColor.RED + "玩家 " + args[2] + " 不在线或不存在！");
@@ -133,12 +134,14 @@ public class CommandHandler implements CommandExecutor{
         // 如果有参数，设置日志记录状态，并保存到配置文件
         if (args[1].equalsIgnoreCase("on")) {
             plugin.config.set("log.enabled", true);
+            plugin.saveConfig();
             sender.sendMessage(ChatColor.YELLOW + "日志记录状态： " + (plugin.config.getBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
         } else if (args[1].equalsIgnoreCase("off")) {
             plugin.config.set("log.enabled", false);
+            plugin.saveConfig();
             sender.sendMessage(ChatColor.YELLOW + "日志记录状态： " + (plugin.config.getBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
         } else {
-            sender.sendMessage(ChatColor.RED + "用法: /tracklog <on|off>");
+            sender.sendMessage(ChatColor.RED + "用法: /playertracker log <on|off>");
         }
         return true;
     }
