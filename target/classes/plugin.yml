@@ -9,6 +9,7 @@ commands:
     description: playertracker插件主命令
     usage: /playertracker <subcommands>
     permission: playertracker.use
+    aliases: [pt]
 permissions:
   playertracker.admin:
     description: 允许管理员修改插件配置
