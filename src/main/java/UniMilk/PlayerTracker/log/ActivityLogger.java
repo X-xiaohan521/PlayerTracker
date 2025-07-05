@@ -10,8 +10,8 @@ import unimilk.playertracker.PlayerTracker;
 import unimilk.playertracker.util.PlayerStatusUtils;
 
 public class ActivityLogger {
-    private final PlayerTracker plugin; // 定义插件实例
-    private final File logFile; // 定义日志文件实例
+    private final PlayerTracker plugin; // 定义插件对象
+    private final File logFile; // 定义日志文件对象
 
     public ActivityLogger(PlayerTracker plugin) {
         // 构造函数，接收插件实例

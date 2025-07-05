@@ -31,6 +31,7 @@
 | `/pt track <player>` | 查询指定玩家坐标及状态  | `playertracker.use` |
 | `/pt log <on/off>` | 开启/关闭日志记录  | `playertracker.admin` |
 | `/pt viewer add/remove <player>` | 添加/删除对指定玩家的追踪器 | `playertracker.view` |
+| `/pt reload` | 重载配置文件 | `playertracker.admin` |
 
 ### 🔹 功能解释
 1. #### 基础功能 `/pt track`
@@ -151,9 +152,10 @@ src/
 
 ## 📜 更新日志
 > 📌此处只显示最新版本，更早版本详见 `CHANGELOG.md`
-### [3.1.0] - 2025-07-04
+### [3.1.0] - 2025-07-05
 ### 🆕 新增
 - 新增点击追踪器上的坐标复制到剪贴板功能
+- 新增 `/pt reload` 命令，允许在不停止服务器的情况下重载插件配置文件
 
 ### 🌟 优化
 - 优化了命令结构，统一使用 `/playertracker` 或 `/pt` 前缀

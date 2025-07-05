@@ -39,6 +39,9 @@ public class CommandHandler implements CommandExecutor{
             case "log":
                 // 调用handleLogCommand方法处理 `/playertracker log` 命令
                 return handleLogCommand(sender, args);
+            case "reload":
+                // 调用handleReloadCommand方法处理 `/playertracker reload` 命令
+                return handleReloadCommand(sender);
             default:
                 sender.sendMessage(ChatColor.RED + "未知命令，请使用 /playertracker help 查看帮助。");
         }
@@ -144,5 +147,21 @@ public class CommandHandler implements CommandExecutor{
             sender.sendMessage(ChatColor.RED + "用法: /playertracker log <on|off>");
         }
         return true;
+    }
+
+    private boolean handleReloadCommand(CommandSender sender) {
+        // 处理 `/playertracker reload` 命令
+
+        // 检查是否有权限使用该命令
+        if (!sender.hasPermission("playertracker.admin") && !(sender instanceof org.bukkit.command.ConsoleCommandSender)) {
+            sender.sendMessage(ChatColor.RED + "你没有权限使用此命令！");
+            return true;
+        }
+
+        plugin.reloadConfig();
+        plugin.onConfigReload();
+        sender.sendMessage(ChatColor.YELLOW + "配置文件已重新加载！");
+        return true;
+
     }
 }
