@@ -104,7 +104,7 @@ public class CommandHandler implements CommandExecutor{
             Player target = Bukkit.getPlayer(args[2]);
             if (target != null) {
                 plugin.viewer.addTracker((Player) sender, target);
-                sender.sendMessage(ChatColor.YELLOW + "开始追踪玩家" + ChatColor.GREEN + target.getName() + ChatColor.YELLOW + "。");
+                sender.sendMessage(ChatColor.YELLOW + "开始追踪玩家 " + ChatColor.GREEN + target.getName() + ChatColor.YELLOW + " 。");
             } else {
                 // 找不到玩家，报错
                 sender.sendMessage(ChatColor.RED + "玩家 " + args[2] + " 不在线或不存在！");
