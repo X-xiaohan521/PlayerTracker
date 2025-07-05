@@ -15,7 +15,8 @@ permissions:
     description: 允许管理员修改插件配置
     default: op
   playertracker.use:
-    description: 允许玩家使用 /pt 命令
+    description: 允许玩家使用 /pt 相关命令
     default: op
   playertracker.view:
     description: 允许玩家使用 /pt viewer 命令
+    default: op
