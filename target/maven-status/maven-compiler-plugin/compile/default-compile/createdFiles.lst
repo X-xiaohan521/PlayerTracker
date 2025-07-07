@@ -1,6 +1,8 @@
-unimilk\playertracker\listener\EventListener.class
 com\example\playertracker\App.class
+unimilk\playertracker\command\CommandTabCompleter.class
 unimilk\playertracker\viewer\TrackViewer.class
+unimilk\playertracker\command\CommandHandler.class
 unimilk\playertracker\PlayerTracker.class
 unimilk\playertracker\log\ActivityLogger.class
 unimilk\playertracker\util\PlayerStatusUtils.class
+unimilk\playertracker\log\EventListener.class

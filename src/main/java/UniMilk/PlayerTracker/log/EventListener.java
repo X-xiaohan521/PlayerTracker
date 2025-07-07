@@ -1,6 +1,4 @@
-package unimilk.playertracker.listener;
-
-import unimilk.playertracker.log.ActivityLogger;
+package unimilk.playertracker.log;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

@@ -4,3 +4,4 @@ plugin:
 log:
   enabled: true
   schedule: 300
+

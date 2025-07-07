@@ -2,29 +2,21 @@ name: PlayerTracker
 main: unimilk.playertracker.PlayerTracker
 authors:
   - unimilk
-version: 3.0.0
+version: 3.1.0
 api-version: 1.19
 commands:
-  track:
-    description: 查询在线玩家的位置和状态
-    usage: /track [玩家名]
+  playertracker:
+    description: playertracker插件主命令
+    usage: /playertracker <subcommands>
     permission: playertracker.use
-  
-  trackview:
-    description: 实时显示指定玩家的坐标
-    usage: /trackview [玩家名|stop]
-    permission: playertracker.view
-  
-  tracklog:
-    description: 开启/关闭玩家状态日志
-    usage: /tracklog [on|off]
-    permission: playertracker.admin
+    aliases: [pt]
 permissions:
   playertracker.admin:
     description: 允许管理员修改插件配置
     default: op
   playertracker.use:
-    description: 允许玩家使用 /track 命令
+    description: 允许玩家使用 /pt 相关命令
     default: op
   playertracker.view:
-    description: 允许玩家使用 /trackview 命令
+    description: 允许玩家使用 /pt viewer 命令
+    default: op
