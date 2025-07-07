@@ -1,9 +1,11 @@
 package unimilk.playertracker;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import unimilk.playertracker.command.CommandHandler;
+import unimilk.playertracker.command.CommandTabCompleter;
 import unimilk.playertracker.log.*;
 import unimilk.playertracker.viewer.TrackViewer;
 
@@ -35,6 +37,9 @@ public class PlayerTracker extends JavaPlugin {
         commandHandler = new CommandHandler(this); // 创建命令处理器实例
         this.getCommand("playertracker").setExecutor(commandHandler); // 注册命令处理器
 
+        // 加载 Tab补全器
+        this.getCommand("playertracker").setTabCompleter(new CommandTabCompleter());
+
         getLogger().info("PlayerTracker 插件加载完毕！");
     }
 
@@ -49,6 +54,20 @@ public class PlayerTracker extends JavaPlugin {
         } else {
             getLogger().warning("PlayerTracker 插件已禁用，请检查配置文件！");
         }
+    }
+
+    public void onConfigReload() {
+        // 重载配置文件函数
+
+        // 更新 config 对象
+        this.config = getConfig();
+
+        // 重新启动定时任务
+        Bukkit.getScheduler().cancelTasks(this); // 停止所有任务
+        logger.scheduleLogging(); // 启动定时记录任务
+        viewer.startTrackingLoop(); // 启动跟踪循环
+
+        getLogger().info("配置文件已重新加载！");
     }
 
 }

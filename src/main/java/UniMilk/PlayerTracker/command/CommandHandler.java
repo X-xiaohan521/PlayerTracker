@@ -39,6 +39,9 @@ public class CommandHandler implements CommandExecutor{
             case "log":
                 // 调用handleLogCommand方法处理 `/playertracker log` 命令
                 return handleLogCommand(sender, args);
+            case "reload":
+                // 调用handleReloadCommand方法处理 `/playertracker reload` 命令
+                return handleReloadCommand(sender);
             default:
                 sender.sendMessage(ChatColor.RED + "未知命令，请使用 /playertracker help 查看帮助。");
         }
@@ -49,13 +52,12 @@ public class CommandHandler implements CommandExecutor{
     private boolean handleTrackCommand(CommandSender sender, String[] args) {
         // 处理 `/playertracker track` 命令
         
-        // 检查是否有权限使用 /track 命令
+        // 只有拥有 "playertracker.use" 权限的玩家和服务器控制台可以使用该命令
         if (!sender.hasPermission("playertracker.use") && !(sender instanceof org.bukkit.command.ConsoleCommandSender)) {
-            sender.sendMessage(ChatColor.RED + "你没有权限使用此命令！");
-            return true;
-        }
-        
-        // 如果有权限，继续执行命令
+                sender.sendMessage(ChatColor.RED + "你没有权限使用此命令！");
+                return true;
+            }
+
         if (args.length == 1) {
             // 没有参数时，查询所有在线玩家
             sender.sendMessage(ChatColor.GOLD + "===== 在线玩家信息 =====");
@@ -104,7 +106,7 @@ public class CommandHandler implements CommandExecutor{
             Player target = Bukkit.getPlayer(args[2]);
             if (target != null) {
                 plugin.viewer.addTracker((Player) sender, target);
-                sender.sendMessage(ChatColor.YELLOW + "开始追踪玩家" + ChatColor.GREEN + target.getName() + ChatColor.YELLOW + "。");
+                sender.sendMessage(ChatColor.YELLOW + "开始追踪玩家 " + ChatColor.GREEN + target.getName() + ChatColor.YELLOW + " 。");
             } else {
                 // 找不到玩家，报错
                 sender.sendMessage(ChatColor.RED + "玩家 " + args[2] + " 不在线或不存在！");
@@ -144,5 +146,21 @@ public class CommandHandler implements CommandExecutor{
             sender.sendMessage(ChatColor.RED + "用法: /playertracker log <on|off>");
         }
         return true;
+    }
+
+    private boolean handleReloadCommand(CommandSender sender) {
+        // 处理 `/playertracker reload` 命令
+
+        // 检查是否有权限使用该命令
+        if (!sender.hasPermission("playertracker.admin") && !(sender instanceof org.bukkit.command.ConsoleCommandSender)) {
+            sender.sendMessage(ChatColor.RED + "你没有权限使用此命令！");
+            return true;
+        }
+
+        plugin.reloadConfig();
+        plugin.onConfigReload();
+        sender.sendMessage(ChatColor.YELLOW + "配置文件已重新加载！");
+        return true;
+
     }
 }
