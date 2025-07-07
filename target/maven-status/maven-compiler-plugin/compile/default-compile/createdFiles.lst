@@ -1,4 +1,5 @@
 com\example\playertracker\App.class
+unimilk\playertracker\command\CommandTabCompleter.class
 unimilk\playertracker\viewer\TrackViewer.class
 unimilk\playertracker\command\CommandHandler.class
 unimilk\playertracker\PlayerTracker.class
