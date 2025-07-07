@@ -51,29 +51,21 @@ public class CommandHandler implements CommandExecutor{
 
     private boolean handleTrackCommand(CommandSender sender, String[] args) {
         // 处理 `/playertracker track` 命令
-
-        if (args.length == 1) {
-            // 没有参数时，查询所有在线玩家
-
-            // 只有拥有 "playertracker.admin" 权限的玩家和服务器控制台可以查询全部玩家
-            if (!sender.hasPermission("playertracker.admin") && !(sender instanceof org.bukkit.command.ConsoleCommandSender)) {
+        
+        // 只有拥有 "playertracker.use" 权限的玩家和服务器控制台可以使用该命令
+        if (!sender.hasPermission("playertracker.use") && !(sender instanceof org.bukkit.command.ConsoleCommandSender)) {
                 sender.sendMessage(ChatColor.RED + "你没有权限使用此命令！");
                 return true;
             }
 
+        if (args.length == 1) {
+            // 没有参数时，查询所有在线玩家
             sender.sendMessage(ChatColor.GOLD + "===== 在线玩家信息 =====");
             for (Player player : Bukkit.getOnlinePlayers()) {
                 PlayerStatusUtils.sendPlayerInfo(sender, player);
             }
         } else {
             // 有参数时，查询特定玩家
-
-            // 拥有 "playertracker.use" 权限的玩家和服务器控制台可以查询指定玩家
-            if (!sender.hasPermission("playertracker.use") && !(sender instanceof org.bukkit.command.ConsoleCommandSender)) {
-                sender.sendMessage(ChatColor.RED + "你没有权限使用此命令！");
-                return true;
-            }
-
             Player target = Bukkit.getPlayer(args[1]);
             if (target == null) {
                 sender.sendMessage(ChatColor.RED + "玩家 " + args[1] + " 不在线或不存在！");
