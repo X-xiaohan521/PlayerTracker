@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import unimilk.playertracker.command.CommandHandler;
+import unimilk.playertracker.command.CommandTabCompleter;
 import unimilk.playertracker.log.*;
 import unimilk.playertracker.viewer.TrackViewer;
 
@@ -35,6 +36,9 @@ public class PlayerTracker extends JavaPlugin {
         // 加载命令处理器
         commandHandler = new CommandHandler(this); // 创建命令处理器实例
         this.getCommand("playertracker").setExecutor(commandHandler); // 注册命令处理器
+
+        // 加载 Tab补全器
+        this.getCommand("playertracker").setTabCompleter(new CommandTabCompleter());
 
         getLogger().info("PlayerTracker 插件加载完毕！");
     }
