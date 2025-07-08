@@ -129,19 +129,17 @@ public class CommandHandler implements CommandExecutor{
 
         // 如果没有参数，显示当前日志记录状态
         if (args.length == 1) {
-            sender.sendMessage(ChatColor.YELLOW + "日志记录状态： " + (plugin.config.getBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
+            sender.sendMessage(ChatColor.YELLOW + "日志记录状态： " + (plugin.getConfigBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
             return true;
         }
         
         // 如果有参数，设置日志记录状态，并保存到配置文件
         if (args[1].equalsIgnoreCase("on")) {
-            plugin.config.set("log.enabled", true);
-            plugin.saveConfig();
-            sender.sendMessage(ChatColor.YELLOW + "日志记录状态： " + (plugin.config.getBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
+            plugin.setConfig("log.enabled", true);
+            sender.sendMessage(ChatColor.YELLOW + "日志记录状态： " + (plugin.getConfigBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
         } else if (args[1].equalsIgnoreCase("off")) {
-            plugin.config.set("log.enabled", false);
-            plugin.saveConfig();
-            sender.sendMessage(ChatColor.YELLOW + "日志记录状态： " + (plugin.config.getBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
+            plugin.setConfig("log.enabled", false);
+            sender.sendMessage(ChatColor.YELLOW + "日志记录状态： " + (plugin.getConfigBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
         } else {
             sender.sendMessage(ChatColor.RED + "用法: /playertracker log <on|off>");
         }

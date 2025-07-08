@@ -35,6 +35,11 @@ public class TrackViewer {
         return trackingMap.remove(tracker);
     }
 
+    public Map<Player, Player> getTrackingMap() {
+        // 获取追踪关系函数
+        return trackingMap;
+    }
+
     public static void viewPlayerInfo(Player tracker, Player target) {
         // 将目标玩家信息显示在追踪者的游戏画面上
 

@@ -11,7 +11,7 @@ import unimilk.playertracker.viewer.TrackViewer;
 
 public class PlayerTracker extends JavaPlugin {
 
-    public FileConfiguration config; // 初始化配置文件对象
+    private FileConfiguration config; // 初始化配置文件对象
     private ActivityLogger logger; // 初始化活动记录器对象
     public TrackViewer viewer; // 初始化追踪器对象
     private CommandHandler commandHandler; // 初始化命令处理器对象
@@ -54,6 +54,17 @@ public class PlayerTracker extends JavaPlugin {
         } else {
             getLogger().warning("PlayerTracker 插件已禁用，请检查配置文件！");
         }
+    }
+
+    public void setConfig(String key, Object value) {
+        // 设置配置项函数
+        config.set(key, value);
+        this.saveConfig();
+    }
+
+    public boolean getConfigBoolean(String key) {
+        // 获取配置项值函数
+        return config.getBoolean(key);
     }
 
     public void onConfigReload() {
