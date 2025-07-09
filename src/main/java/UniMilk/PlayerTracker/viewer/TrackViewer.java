@@ -28,6 +28,7 @@ public class TrackViewer {
     public void addTracker(Player tracker, Player target) {
         // 添加追踪器函数
         trackingMap.put(tracker, target);
+        manager.removeBossBar(tracker);
         manager.addBossBar(tracker, DirectionDistanceCalc.generateBossBarTitle(tracker, target));
     }
 
