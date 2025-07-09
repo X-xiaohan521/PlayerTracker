@@ -1,6 +1,6 @@
 package unimilk.playertracker.viewer;
 
-import unimilk.playertracker.PlayerTracker;
+import unimilk.playertracker.util.DirectionDistanceCalc;
 import unimilk.playertracker.util.PlayerStatusUtils;
 
 import org.bukkit.entity.Player;
@@ -17,27 +17,29 @@ import net.md_5.bungee.api.ChatColor;
 
 public class TrackViewer {
     // 追踪查看器类，用于实时跟踪目标状态，并显示在追踪者游戏画面上
-    private final PlayerTracker plugin;
+    private final BossBarManager manager;
     private Map<Player, Player> trackingMap = new HashMap<>(); // 用于存储追踪者和目标玩家之间的映射
 
-    public TrackViewer(PlayerTracker plugin) {
+    public TrackViewer(BossBarManager manager) {
         // 构造函数，接收插件实例
-        this.plugin = plugin; // 初始化插件实例
+        this.manager = manager; // 初始化BossBar管理器
     }
 
     public void addTracker(Player tracker, Player target) {
         // 添加追踪器函数
         trackingMap.put(tracker, target);
+        manager.addBossBar(tracker, DirectionDistanceCalc.generateBossBarTitle(tracker, target));
     }
 
     public Player removeTracker(Player tracker) {
         // 移除追踪器函数
+        manager.removeBossBar(tracker);
         return trackingMap.remove(tracker);
     }
 
-    public Map<Player, Player> getTrackingMap() {
+    public Player getTarget(Player tracker) {
         // 获取追踪关系函数
-        return trackingMap;
+        return trackingMap.get(tracker);
     }
 
     public static void viewPlayerInfo(Player tracker, Player target) {
@@ -69,26 +71,29 @@ public class TrackViewer {
         tracker.spigot().sendMessage(ChatMessageType.ACTION_BAR, message);
     }
 
-    public void startTrackingLoop() {
-        // 定时任务，每秒更新一次追踪状态
-        plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
-            for (Map.Entry<Player, Player> entry : trackingMap.entrySet()) {
-                Player tracker = entry.getKey(); // 获取追踪者
-                Player target = entry.getValue(); // 获取目标玩家
-
+    public void refreshTracker(Player player) {
+        // 更新追踪状态函数
+        for (Map.Entry<Player, Player> entry : trackingMap.entrySet()) {
+            Player tracker = entry.getKey(); // 获取追踪者
+            Player target = entry.getValue(); // 获取目标玩家
+            if (player.equals(tracker) || player.equals(target)) {
+                // 如果移动者是目标或追踪者之一，更新追踪器
                 if (tracker.isOnline() && target.isOnline()) {
                     // 如果追踪者和目标玩家都在线，发送目标玩家信息
                     viewPlayerInfo(tracker, target);
+                    manager.updateBossBar(tracker, DirectionDistanceCalc.generateBossBarTitle(tracker, target));
+                    manager.showBossBar(tracker);
                 }
                 else if (tracker.isOnline()) {
                     // 如果目标玩家不在线，显示错误消息
                     tracker.spigot().sendMessage(
                         ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.YELLOW + "目标玩家 " + ChatColor.GREEN + target.getName() + ChatColor.RED + " 不在线。"));
+                    manager.hideBossBar(tracker);
                 }
                 else {
                     continue; // 如果追踪者不在线，跳过
                 }
             }
-        }, 0L, 20L);
+        }
     }
 }
