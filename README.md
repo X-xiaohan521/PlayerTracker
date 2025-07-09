@@ -180,6 +180,7 @@ src/
 - 提交代码：Fork 代码仓库并发起 [🔗 Pull Request](https://github.com/X-xiaohan521/PlayerTracker/pulls)
 
 ---
+
 ## 📜 许可证
 ### 本插件基于 Unlicense 开源发布。
 任何人都可以以及任何途径自由复制、修改、发布、使用、编译、出售或以源代码形式或编译后的形式分发此软件，并用于任何目的（商业或非商业）。
@@ -189,7 +190,6 @@ src/
 ## 📞 联系方式
 ### 📧 Email: unimilk891@gmail.com
 ### 🌐 GitHub: [X-xiaohan521](https://github.com/X-xiaohan521/)
-
 
 ---
 
