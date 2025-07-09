@@ -1,4 +1,4 @@
-package unimilk.playertracker.log;
+package unimilk.playertracker.util;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -13,15 +13,26 @@ import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 
+import unimilk.playertracker.log.ActivityLogger;
+import unimilk.playertracker.viewer.TrackViewer;
+
 public class EventListener implements Listener {
     // 事件监听器类，用于处理玩家活动事件
     private final ActivityLogger logger;
+    private final TrackViewer viewer;
 
-    public EventListener(ActivityLogger logger) {
+    public EventListener(ActivityLogger logger, TrackViewer viewer) {
         // 构造函数，接收活动记录器实例
         this.logger = logger;
+        this.viewer = viewer;
     }
     
+    @EventHandler
+    public void onPlayerMove(org.bukkit.event.player.PlayerMoveEvent event) {
+        // 玩家移动事件处理
+        viewer.refreshTracker(event.getPlayer());
+    }
+
     @EventHandler
     public void onPlayerJoin(org.bukkit.event.player.PlayerJoinEvent event) {
         // 玩家加入游戏事件处理

@@ -3,7 +3,7 @@
 
 🚀 **PlayerTracker** is an esay-to-use plugin for **1.19.1 Minecraft servers**. Server ops are able to get to know **the coordinary and status** of online players.
 
-📌 **当前版本：`v3.1.0`**  
+📌 **当前版本：`v3.2.0`**  
 📌 **兼容 Minecraft 版本：`1.19.1`**  
 📌 **支持服务端：`Spigot` `Paper`**
 
@@ -15,7 +15,7 @@
 
 ### 2️⃣ 安装步骤
 1. **下载** `.jar` 文件。
-2. 将插件文件放入服务器的 **`plugins`** 文件夹。
+2. 将插件文件放入服务器的 `plugins` 文件夹。
 3. 重启服务器。
 4. 在游戏内使用 `/playertracker` 或 `/pt` 命令进行测试。
 
@@ -139,6 +139,9 @@ src/
   Activity
   ├──status
   └──event
+
+  Direction
+  Distance
 ```
 
 ---
@@ -157,18 +160,15 @@ src/
 
 ## 📜 更新日志
 > 📌此处只显示最新版本，更早版本详见 `CHANGELOG.md`
-### [3.1.0] - 2025-07-07
+### [3.2.0] - 2025-07-09
 ### 🆕 新增
-- 新增点击追踪器上的坐标复制到剪贴板功能
-- 新增 `/pt reload` 命令，允许在不停止服务器的情况下重载插件配置文件
+- 新增方向、距离指示器，在 `BossBar` 的位置直观地展示追踪者与目标玩家间的方向和距离关系
 
 ### 🌟 优化
-- 优化了命令结构，统一使用 `/playertracker` 或 `/pt` 前缀
-- 可以通过 `/pt viewer add <player>` 和 `/pt viewer remove` 来添加或移除追踪器（从而支持：追踪名为 stop 的玩家）
-- 添加命令补全器，方便输入命令
+- 取消每秒刷新跟踪器状态，改为玩家移动时再触发，增强信息的即时性
 
 ### 🛠 修复
-- 修复了添加追踪器没有消息提示的问题
+- 修复了添加新的追踪器时，旧的追踪器不会自动删除的问题
 
 ---
 
@@ -180,6 +180,7 @@ src/
 - 提交代码：Fork 代码仓库并发起 [🔗 Pull Request](https://github.com/X-xiaohan521/PlayerTracker/pulls)
 
 ---
+
 ## 📜 许可证
 ### 本插件基于 Unlicense 开源发布。
 任何人都可以以及任何途径自由复制、修改、发布、使用、编译、出售或以源代码形式或编译后的形式分发此软件，并用于任何目的（商业或非商业）。
@@ -189,7 +190,6 @@ src/
 ## 📞 联系方式
 ### 📧 Email: unimilk891@gmail.com
 ### 🌐 GitHub: [X-xiaohan521](https://github.com/X-xiaohan521/)
-
 
 ---
 
