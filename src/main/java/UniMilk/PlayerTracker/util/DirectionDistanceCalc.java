@@ -7,25 +7,28 @@ import net.md_5.bungee.api.ChatColor;
 
 public class DirectionDistanceCalc {
     
-    // 计算追踪者到目标的方位
+    // 计算追踪者（A）到目标（B）的方位
     public static String getDirection(Player tracker, Player target) {
         Location from = tracker.getLocation();
         Location to = target.getLocation();
 
+        double yaw = from.getYaw();
+
         double dx = to.getX() - from.getX();
         double dz = to.getZ() - from.getZ();
-        double angle = Math.toDegrees(Math.atan2(-dx, dz)); // 注意 Minecraft Z轴为南北
+        double angle = Math.toDegrees(Math.atan2(-dx, dz)); // 计算直线AB的倾斜角（注意 Minecraft Z轴为南北，故dx前添负号）
 
-        angle = (angle + 360) % 360;
+        angle = (angle + 360) % 360; // 计算AB与正南方向的夹角（转换为0~360°）
+        double theta = angle - yaw; // 减去A视线朝向角度，所得即为A的视线与AB方向的夹角
 
-        if (angle < 22.5 || angle >= 337.5) return "正南";
-        if (angle < 67.5) return "西南";
-        if (angle < 112.5) return "正西";
-        if (angle < 157.5) return "西北";
-        if (angle < 202.5) return "正北";
-        if (angle < 247.5) return "东北";
-        if (angle < 292.5) return "正东";
-        return "东南";
+        if (theta < 22.5 || theta >= 337.5) return "↑";
+        if (theta < 67.5) return "↗";
+        if (theta < 112.5) return "→";
+        if (theta < 157.5) return "↘";
+        if (theta < 202.5) return "↓";
+        if (theta < 247.5) return "↙";
+        if (theta < 292.5) return "←";
+        return "↖";
     }
 
     // 计算追踪者和目标间的距离
