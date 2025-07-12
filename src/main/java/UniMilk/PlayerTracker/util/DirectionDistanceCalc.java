@@ -54,7 +54,7 @@ public class DirectionDistanceCalc {
         // 生成BossBar信息函数
         return ChatColor.YELLOW + "玩家：" + ChatColor.GREEN + target.getName()
                 + ChatColor.YELLOW  + " | 水平方向：" + ChatColor.WHITE + getHorizontalDirection(tracker, target)
-                + ChatColor.YELLOW + " | 垂直方向" + ChatColor.WHITE + getVerticalDirection(tracker, target)
+                + ChatColor.YELLOW + " | 垂直方向：" + ChatColor.WHITE + getVerticalDirection(tracker, target)
                 + ChatColor.YELLOW + " | 距离：" + ChatColor.WHITE + getDistance(tracker, target);
     }
 }
