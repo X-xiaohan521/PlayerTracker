@@ -7,8 +7,8 @@ import net.md_5.bungee.api.ChatColor;
 
 public class DirectionDistanceCalc {
     
-    // 计算追踪者（A）到目标（B）的方位
-    public static String getDirection(Player tracker, Player target) {
+    public static String getHorizontalDirection(Player tracker, Player target) {
+        // 计算追踪者（A）到目标（B）的水平方位
         Location from = tracker.getLocation();
         Location to = target.getLocation();
 
@@ -31,15 +31,30 @@ public class DirectionDistanceCalc {
         return "↖";
     }
 
-    // 计算追踪者和目标间的距离
+    public static String getVerticalDirection(Player tracker, Player target) {
+        // 计算A到B的垂直方位
+        Location from = tracker.getLocation();
+        Location to = target.getLocation();
+
+        if (from.getY() < to.getY()) {
+            return "↑";
+        } else if (from.getY() > to.getY()) {
+            return "↓";
+        } else {
+            return "水平";
+        }
+    }
+    
     public static int getDistance(Player tracker, Player target) {
+        // 计算追踪者和目标间的距离
         return (int)tracker.getLocation().distance(target.getLocation());
     }
     
-    // 生成BossBar信息函数
     public static String generateBossBarTitle(Player tracker, Player target) {
+        // 生成BossBar信息函数
         return ChatColor.YELLOW + "玩家：" + ChatColor.GREEN + target.getName()
-                + ChatColor.YELLOW  + " | 方向：" + ChatColor.WHITE + getDirection(tracker, target)
+                + ChatColor.YELLOW  + " | 水平方向：" + ChatColor.WHITE + getHorizontalDirection(tracker, target)
+                + ChatColor.YELLOW + " | 垂直方向" + ChatColor.WHITE + getVerticalDirection(tracker, target)
                 + ChatColor.YELLOW + " | 距离：" + ChatColor.WHITE + getDistance(tracker, target);
     }
 }

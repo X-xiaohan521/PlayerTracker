@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
+import org.bukkit.Location;
 
 import unimilk.playertracker.log.ActivityLogger;
 import unimilk.playertracker.viewer.TrackViewer;
@@ -30,7 +31,25 @@ public class EventListener implements Listener {
     @EventHandler
     public void onPlayerMove(org.bukkit.event.player.PlayerMoveEvent event) {
         // 玩家移动事件处理
-        viewer.refreshTracker(event.getPlayer());
+        Location from = event.getFrom();
+        Location to = event.getTo();
+
+        // 计算玩家位移
+        double deltaX = Math.abs(from.getX() - to.getX());
+        double deltaY = Math.abs(from.getY() - to.getY());
+        double deltaZ = Math.abs(from.getZ() - to.getZ());
+        double displacement = deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ;
+
+        // 计算玩家视角转动量
+        double deltaYaw = Math.abs(from.getYaw() - to.getYaw());
+        double deltaPitch = Math.abs(from.getPitch() - to.getPitch());
+        
+        // 只有当玩家在任意方向位移超过0.5格，或视角在任意方向转动超过15°，才触发追踪器刷新
+        if (displacement > 0.25) {
+            viewer.refreshTracker(event.getPlayer());
+        } else if (deltaYaw > 15 || deltaPitch > 15) {
+            viewer.refreshTracker(event.getPlayer());
+        }
     }
 
     @EventHandler
