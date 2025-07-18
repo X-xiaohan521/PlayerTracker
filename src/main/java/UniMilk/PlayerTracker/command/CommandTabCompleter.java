@@ -17,7 +17,7 @@ public class CommandTabCompleter implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         // 补全 `/playertracker ?` 或 `/pt ?`
         if (args.length == 1) {
-            return Arrays.asList("track", "viewer", "log", "reload", "help");
+            return getListStartsWith(Arrays.asList("track", "viewer", "log", "reload", "help"), args[0]);
         }
 
         // 补全 `/playertracker track ?` 或 `/pt track ?`
@@ -27,7 +27,7 @@ public class CommandTabCompleter implements TabCompleter {
 
         // 补全 `/playertracker viewer ?` 或 `/pt viewer ?`
         if (args.length == 2 && args[0].equalsIgnoreCase("viewer")) {
-            return Arrays.asList("add", "remove");
+            return getListStartsWith(Arrays.asList("add", "remove"), args[1]);
         }
         // 补全 `/pt viewer add/remove ?`
         if (args.length == 3 && args[0].equalsIgnoreCase("viewer")) {
@@ -36,16 +36,22 @@ public class CommandTabCompleter implements TabCompleter {
 
         // 补全 `/playertracker log ?` 或 `/pt log ?`
         if (args.length == 2 && args[0].equalsIgnoreCase("log")) {
-            return Arrays.asList("on", "off");
+            return getListStartsWith(Arrays.asList("on", "off"), args[1]);
         }
 
         return new ArrayList<>();
     }
 
-    public List<String> getPlayerNameList(String initial) {
+    private List<String> getPlayerNameList(String initial) {
         return Bukkit.getOnlinePlayers().stream()
             .sorted(Comparator.comparing(Player::getName))
             .map(Player::getName)
+            .filter(name -> name.toLowerCase().startsWith(initial))
+            .collect(Collectors.toList());
+    }
+
+    private List<String> getListStartsWith(List<String> list,String initial) {
+        return list.stream()
             .filter(name -> name.toLowerCase().startsWith(initial))
             .collect(Collectors.toList());
     }
