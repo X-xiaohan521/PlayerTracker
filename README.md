@@ -127,14 +127,17 @@ src/
             └── playertracker/
                 ├── PlayerTracker.java                 // 主类
                 ├── command/
-                │   └── CommandHandler.java              // 处理命令
+                │   ├── CommandHandler.java              // 命令处理器
+                │   └── CommandTabCompleter.java       // 命令补全器
                 ├── viewer/
-                │   └── TrackViewer.java               // 追踪器
+                │   ├── TrackViewer.java               // 追踪器
+                │   └── BossBarManager.java            // BossBar管理器
                 ├── log/
-                │   ├── ActivityLogger.java            // 日志记录器
-                │   └── PlayerActivityListener.java    // 玩家行为监听器
+                │   └── ActivityLogger.java            // 日志记录器
                 └── util/
-                    └── PlayerStatusUtils.java         // 获取玩家状态
+                    ├── PlayerStatusUtils.java         // 获取玩家状态工具
+                    ├── DirectionDistanceCalc.java    // 方向/距离计算工具
+                    └── EventListener.java            // 事件监听器
 
 ```
 ### 插件数据结构
@@ -176,7 +179,7 @@ src/
 - 
 
 ### 🛠 修复
-- 
+- 更新了插件架构说明
 
 ---
 
