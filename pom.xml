@@ -12,7 +12,7 @@
     <description>查询玩家坐标与状态的 Spigot 插件</description>
 
     <properties>
-        <java.version>18</java.version>  <!-- Spigot 1.19.1 需要 Java 17 -->
+        <java.version>17</java.version>  <!-- Spigot 1.19.1 需要 Java 17 -->
         <spigot.version>1.19.1-R0.1-SNAPSHOT</spigot.version>
     </properties>
 
