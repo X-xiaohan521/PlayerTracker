@@ -16,7 +16,7 @@ permissions:
     default: op
   playertracker.use:
     description: 允许玩家使用 /pt 相关命令
-    default: op
+    default: true
   playertracker.view:
     description: 允许玩家使用 /pt viewer 命令
     default: op
