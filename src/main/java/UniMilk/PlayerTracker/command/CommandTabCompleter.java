@@ -36,7 +36,11 @@ public class CommandTabCompleter implements TabCompleter {
 
         // 补全 `/playertracker log ?` 或 `/pt log ?`
         if (args.length == 2 && args[0].equalsIgnoreCase("log")) {
-            return getListStartsWith(Arrays.asList("on", "off"), args[1]);
+            return getListStartsWith(Arrays.asList("on", "off", "schedule"), args[1]);
+        }
+        // 补全 `/pt log schedule`
+        if (args.length == 3 && args[0].equalsIgnoreCase("log")) {
+            return Arrays.asList("<int>");
         }
 
         return new ArrayList<>();

@@ -50,6 +50,7 @@ public class PlayerTracker extends JavaPlugin {
         getLogger().info("PlayerTracker 插件加载完毕！");
     }
 
+    // 插件配置相关函数
     private void loadConfig() {
         // 读取配置文件函数
         saveDefaultConfig(); // 如果配置文件不存在，则创建默认配置文件
@@ -70,8 +71,13 @@ public class PlayerTracker extends JavaPlugin {
     }
 
     public boolean getConfigBoolean(String key) {
-        // 获取配置项值函数
+        // 获取配置项布尔值函数
         return config.getBoolean(key);
+    }
+
+    public int getConfigInt(String key) {
+        // 获取配置项整型值函数
+        return config.getInt(key);
     }
 
     public void onConfigReload() {

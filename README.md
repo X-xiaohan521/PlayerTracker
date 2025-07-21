@@ -30,6 +30,7 @@
 | `/pt track`    | 查询所有在线玩家坐标及状态    | `playertracker.use` |
 | `/pt track <player>` | 查询指定玩家坐标及状态  | `playertracker.use` |
 | `/pt log <on/off>` | 开启/关闭日志记录  | `playertracker.admin` |
+| `/pt log schedule <int>` | 调整日志记录间隔（秒），默认为 300  | `playertracker.admin` |
 | `/pt reload` | 重载配置文件 | `playertracker.admin` |
 | `/pt viewer add/remove <player>` | 添加/删除对指定玩家的追踪器 | `playertracker.view` |
 
@@ -172,8 +173,6 @@ src/
 ## 📜 更新日志
 > 📌此处只显示最新版本，更早版本详见 `CHANGELOG.md`
 ### [3.3.1] - 2025-07-18
-### 🆕 新增
-- 
 
 ### 🌟 优化
 - 
