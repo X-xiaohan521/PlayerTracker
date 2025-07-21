@@ -144,12 +144,18 @@ public class CommandHandler implements CommandExecutor{
             plugin.setConfig("log.enabled", false);
             sender.sendMessage(ChatColor.YELLOW + "日志记录状态： " + (plugin.getConfigBoolean("log.enabled") ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
         } else if (args[1].equalsIgnoreCase("schedule")) {
-            try {
-                int schedule = Integer.parseInt(args[2]);
-                plugin.setConfig("log.schedule", schedule);
+            if (args.length == 2) {
                 sender.sendMessage(ChatColor.YELLOW + "日志记录间隔： " + ChatColor.GREEN + plugin.getConfigInt("log.schedule"));
-            } catch (NumberFormatException e) {
-                sender.sendMessage(ChatColor.RED + "用法: /playertracker log schedule <int>(s)");
+                return true;
+            }
+            else {
+                try {
+                    int schedule = Integer.parseInt(args[2]);
+                    plugin.setConfig("log.schedule", schedule);
+                    sender.sendMessage(ChatColor.YELLOW + "日志记录间隔： " + ChatColor.GREEN + plugin.getConfigInt("log.schedule"));
+                } catch (NumberFormatException e) {
+                    sender.sendMessage(ChatColor.RED + "用法: /playertracker log schedule <int>(s)");
+                }
             }
         } else {
             sender.sendMessage(ChatColor.RED + "用法: /playertracker log <on|off|schedule>");
