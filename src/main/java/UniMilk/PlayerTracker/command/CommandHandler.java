@@ -30,25 +30,27 @@ public class CommandHandler implements CommandExecutor{
             // 如果无任何参数，输出用法
             sender.sendMessage(ChatColor.RED + "用法：/playertracker <track|viewer|log> ...");
             return true;
+        } else if (args[0].toLowerCase() == "reload") {
+            // 调用handleReloadCommand方法处理 `/playertracker reload` 命令
+            return handleReloadCommand(sender);
+        } else if (!plugin.isPluginEnabled()) {
+            sender.sendMessage("PlayerTracker 插件已禁用！");
+            return true;
+        } else {
+            switch (args[0].toLowerCase()) {
+                case "track":
+                    // 调用handleTrackCommand方法处理 `/playertracker track` 命令
+                    if (plugin.isPluginEnabled()) return handleTrackCommand(sender, args);
+                case "viewer":
+                    // 调用handleViewerCommand方法处理 `/playertracker viewer` 命令
+                    return handleViewerCommand(sender, args);
+                case "log":
+                    // 调用handleLogCommand方法处理 `/playertracker log` 命令
+                    return handleLogCommand(sender, args);
+                default:
+                    sender.sendMessage(ChatColor.RED + "未知命令，请使用 /playertracker help 查看帮助。");
+            }
         }
-
-        switch (args[0].toLowerCase()) {
-            case "track":
-                // 调用handleTrackCommand方法处理 `/playertracker track` 命令
-                return handleTrackCommand(sender, args);
-            case "viewer":
-                // 调用handleViewerCommand方法处理 `/playertracker viewer` 命令
-                return handleViewerCommand(sender, args);
-            case "log":
-                // 调用handleLogCommand方法处理 `/playertracker log` 命令
-                return handleLogCommand(sender, args);
-            case "reload":
-                // 调用handleReloadCommand方法处理 `/playertracker reload` 命令
-                return handleReloadCommand(sender);
-            default:
-                sender.sendMessage(ChatColor.RED + "未知命令，请使用 /playertracker help 查看帮助。");
-        }
-
         return true;
     }
 
@@ -172,7 +174,7 @@ public class CommandHandler implements CommandExecutor{
             return true;
         }
 
-        plugin.reloadConfig();
+        // 调用插件重载函数
         plugin.onConfigReload();
         sender.sendMessage(ChatColor.YELLOW + "配置文件已重新加载！");
         return true;

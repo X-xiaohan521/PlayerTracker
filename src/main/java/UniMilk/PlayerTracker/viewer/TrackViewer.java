@@ -43,6 +43,12 @@ public class TrackViewer {
         return trackingMap.get(tracker);
     }
 
+    public void removeAllTracker() {
+        // 清空所有追踪器函数
+        manager.removeAllBossBar();
+        trackingMap.clear();
+    }
+
     public static void viewPlayerInfo(Player tracker, Player target) {
         // 将目标玩家信息显示在追踪者的游戏画面上
 

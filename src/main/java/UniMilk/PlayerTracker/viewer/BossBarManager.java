@@ -45,4 +45,10 @@ public class BossBarManager {
             bar.removeAll(); // 移除BossBar，释放内存
         }
     }
+
+    public void removeAllBossBar() {
+        // 清空BossBar函数
+        for (BossBar bar : bars.values()) bar.removeAll();
+        bars.clear();
+    }
 }

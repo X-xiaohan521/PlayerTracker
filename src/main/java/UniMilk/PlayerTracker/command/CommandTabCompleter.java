@@ -12,15 +12,33 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
+import unimilk.playertracker.PlayerTracker;
+
 public class CommandTabCompleter implements TabCompleter {
+    private PlayerTracker plugin;
+    
+    public CommandTabCompleter(PlayerTracker plugin) {
+        this.plugin = plugin;
+    }
+    
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        if (!plugin.isPluginEnabled()) {
+            // 如果插件未启用，则提醒管理员可以 reload 插件
+            if (sender.hasPermission("playertracker.admin")) {
+                return getListStartsWith(Arrays.asList("reload"), args[0]);
+            } else {
+                return Arrays.asList("");
+            }
+        }
+        
         // 补全 `/playertracker ?` 或 `/pt ?`
         if (args.length == 1) {
             List<String> list = new ArrayList<>();
             if (sender.hasPermission("playertracker.use")) {
-                // 如果玩家有 "playertracker.use" 权限，添加 track 命令
+                // 如果玩家有 "playertracker.use" 权限，添加 track 和 help 命令
                 list.add("track");
+                list.add("help");
             }
             if (sender.hasPermission("playertracker.admin")) {
                 // 如果玩家有 "playertracker.admin" 权限，添加 log 和 reload 命令
