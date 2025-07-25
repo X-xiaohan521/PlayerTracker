@@ -30,7 +30,7 @@ public class CommandHandler implements CommandExecutor{
             // 如果无任何参数，输出用法
             sender.sendMessage(ChatColor.RED + "用法：/playertracker <track|viewer|log> ...");
             return true;
-        } else if (args[0].toLowerCase() == "reload") {
+        } else if (args[0].equalsIgnoreCase("reload")) {
             // 调用handleReloadCommand方法处理 `/playertracker reload` 命令
             return handleReloadCommand(sender);
         } else if (!plugin.isPluginEnabled()) {
