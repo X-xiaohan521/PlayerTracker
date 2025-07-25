@@ -34,7 +34,7 @@ public class CommandHandler implements CommandExecutor{
             // 调用handleReloadCommand方法处理 `/playertracker reload` 命令
             return handleReloadCommand(sender);
         } else if (!plugin.isPluginEnabled()) {
-            sender.sendMessage("PlayerTracker 插件已禁用！");
+            sender.sendMessage(ChatColor.RED + "PlayerTracker 插件已禁用！");
             return true;
         } else {
             switch (args[0].toLowerCase()) {
