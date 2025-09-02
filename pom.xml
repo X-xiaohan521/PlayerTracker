@@ -5,7 +5,7 @@
 
     <groupId>UniMilk</groupId>
     <artifactId>PlayerTracker</artifactId>
-    <version>3.3.1</version>
+    <version>4.0.0</version>
     <packaging>jar</packaging>
 
     <name>PlayerTracker</name>
