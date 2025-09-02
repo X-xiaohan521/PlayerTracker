@@ -176,7 +176,7 @@ public class CommandHandler implements CommandExecutor{
 
         // 调用插件重载函数
         plugin.onConfigReload();
-        sender.sendMessage(ChatColor.YELLOW + "配置文件已重新加载！");
+        sender.sendMessage(ChatColor.YELLOW + "配置文件已重新加载！状态：" + (plugin.isPluginEnabled() ? ChatColor.GREEN + "已启用" : ChatColor.RED + "已禁用"));
         return true;
 
     }
