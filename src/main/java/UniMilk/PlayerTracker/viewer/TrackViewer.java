@@ -1,6 +1,5 @@
 package unimilk.playertracker.viewer;
 
-import unimilk.playertracker.util.DirectionDistanceCalc;
 import unimilk.playertracker.util.PlayerStatusUtils;
 
 import org.bukkit.entity.Player;
@@ -29,7 +28,7 @@ public class TrackViewer {
         // 添加追踪器函数
         trackingMap.put(tracker, target);
         manager.removeBossBar(tracker);
-        manager.addBossBar(tracker, DirectionDistanceCalc.generateBossBarTitle(tracker, target));
+        manager.addBossBar(tracker, BossBarManager.generateBossBarTitle(tracker, target));
     }
 
     public Player removeTracker(Player tracker) {
@@ -41,6 +40,12 @@ public class TrackViewer {
     public Player getTarget(Player tracker) {
         // 获取追踪关系函数
         return trackingMap.get(tracker);
+    }
+
+    public void removeAllTracker() {
+        // 清空所有追踪器函数
+        manager.removeAllBossBar();
+        trackingMap.clear();
     }
 
     public static void viewPlayerInfo(Player tracker, Player target) {
@@ -82,7 +87,7 @@ public class TrackViewer {
                 if (tracker.isOnline() && target.isOnline()) {
                     // 如果追踪者和目标玩家都在线，发送目标玩家信息
                     viewPlayerInfo(tracker, target);
-                    manager.updateBossBar(tracker, DirectionDistanceCalc.generateBossBarTitle(tracker, target));
+                    manager.updateBossBar(tracker, BossBarManager.generateBossBarTitle(tracker, target));
                     manager.showBossBar(tracker);
                 }
                 else if (tracker.isOnline()) {

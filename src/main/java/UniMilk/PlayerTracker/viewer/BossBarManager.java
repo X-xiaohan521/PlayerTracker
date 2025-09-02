@@ -7,6 +7,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.boss.*;
 import org.bukkit.entity.Player;
 
+import net.md_5.bungee.api.ChatColor;
+
+import unimilk.playertracker.util.DirectionDistanceCalc;
+
 public class BossBarManager {
     // BossBar管理器类
     private final Map<Player, BossBar> bars = new HashMap<>(); // 定义玩家和BossBar的映射Map
@@ -44,5 +48,19 @@ public class BossBarManager {
             bar.setVisible(false); // 设置BossBar为不可见
             bar.removeAll(); // 移除BossBar，释放内存
         }
+    }
+
+    public void removeAllBossBar() {
+        // 清空BossBar函数
+        for (BossBar bar : bars.values()) bar.removeAll();
+        bars.clear();
+    }
+
+    public static String generateBossBarTitle(Player tracker, Player target) {
+        // 生成BossBar信息函数
+        return ChatColor.YELLOW + "玩家：" + ChatColor.GREEN + target.getName()
+                + ChatColor.YELLOW  + " | 水平方向：" + ChatColor.WHITE + DirectionDistanceCalc.getHorizontalDirection(tracker, target)
+                + ChatColor.YELLOW + " | 垂直方向：" + ChatColor.WHITE + DirectionDistanceCalc.getVerticalDirection(tracker, target)
+                + ChatColor.YELLOW + " | 距离：" + ChatColor.WHITE + DirectionDistanceCalc.getDistance(tracker, target);
     }
 }

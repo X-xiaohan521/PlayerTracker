@@ -3,8 +3,6 @@ package unimilk.playertracker.util;
 import org.bukkit.entity.Player;
 import org.bukkit.Location;
 
-import net.md_5.bungee.api.ChatColor;
-
 public class DirectionDistanceCalc {
     
     public static String getHorizontalDirection(Player tracker, Player target) {
@@ -50,11 +48,4 @@ public class DirectionDistanceCalc {
         return (int)tracker.getLocation().distance(target.getLocation());
     }
     
-    public static String generateBossBarTitle(Player tracker, Player target) {
-        // 生成BossBar信息函数
-        return ChatColor.YELLOW + "玩家：" + ChatColor.GREEN + target.getName()
-                + ChatColor.YELLOW  + " | 水平方向：" + ChatColor.WHITE + getHorizontalDirection(tracker, target)
-                + ChatColor.YELLOW + " | 垂直方向：" + ChatColor.WHITE + getVerticalDirection(tracker, target)
-                + ChatColor.YELLOW + " | 距离：" + ChatColor.WHITE + getDistance(tracker, target);
-    }
 }
