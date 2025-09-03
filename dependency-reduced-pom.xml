@@ -51,6 +51,6 @@
   </dependencies>
   <properties>
     <spigot.version>1.19.1-R0.1-SNAPSHOT</spigot.version>
-    <java.version>17</java.version>
+    <java.version>8</java.version>
   </properties>
 </project>
