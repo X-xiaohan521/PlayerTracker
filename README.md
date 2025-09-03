@@ -176,7 +176,7 @@ src/
 - 
 
 ### 🌟 优化
-- 
+- 停止使用 `BungeeCord Chat API`，转向 `Adventure API`，以提高多版本兼容性
 
 ### 🛠 修复
 - 

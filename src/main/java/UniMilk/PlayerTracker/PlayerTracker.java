@@ -5,6 +5,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+
 import unimilk.playertracker.command.CommandHandler;
 import unimilk.playertracker.command.CommandTabCompleter;
 import unimilk.playertracker.log.*;
@@ -16,11 +18,13 @@ public class PlayerTracker extends JavaPlugin {
 
     private boolean isEnabled; // 初始化插件启用状态标识
     private FileConfiguration config; // 初始化配置文件对象
+    private String version; // 初始化游戏版本变量
     private ActivityLogger logger; // 初始化活动记录器对象
     private TrackViewer viewer; // 初始化追踪器对象
     private CommandHandler commandHandler; // 初始化命令处理器对象
     private CommandTabCompleter commandTabCompleter; // 初始化Tab补全器对象
     private BossBarManager manager; // 初始化BossBar管理器
+    private BukkitAudiences adventure; // 初始化Audience对象，用于处理插件对玩家发送的消息
 
     @Override
     // 插件加载时的初始化逻辑
@@ -30,6 +34,9 @@ public class PlayerTracker extends JavaPlugin {
         // 加载配置文件
         isEnabled = loadConfig();
         
+        // 读取游戏版本
+        version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+
         // 加载活动记录器
         logger = new ActivityLogger(this); // 创建活动记录器实例
         
@@ -46,6 +53,9 @@ public class PlayerTracker extends JavaPlugin {
         // 加载 Tab补全器
         commandTabCompleter = new CommandTabCompleter(this); // 创建Tab补全器实例
         this.getCommand("playertracker").setTabCompleter(commandTabCompleter); // 注册Tab补全器
+
+        // 加载消息处理器
+        this.adventure = BukkitAudiences.create(this);
 
         if (isEnabled) {
             // 如果插件启用，则启动组件
@@ -93,6 +103,19 @@ public class PlayerTracker extends JavaPlugin {
         return isEnabled;
     }
 
+    public String getGameVersion() {
+        // 获取游戏版本方法
+        return version;
+    }
+
+    public BukkitAudiences adventure() {
+        // 获取消息处理器方法
+        if (this.adventure == null) {
+            throw new IllegalStateException("Tried to access Adventure while disabled!");
+        }
+        return this.adventure;
+    }
+
     public void onConfigReload() {
         // 重载插件函数
         // 注销所有组件
@@ -112,6 +135,15 @@ public class PlayerTracker extends JavaPlugin {
         }
 
         getLogger().info("PlayerTracker 插件已重新加载！状态：" + (isEnabled ? "已启用" : "已禁用"));
+    }
+
+    @Override
+    public void onDisable() {
+        // 注销消息处理器
+        if (this.adventure != null) {
+            this.adventure.close();
+            this.adventure = null;
+        }
     }
 
 }
