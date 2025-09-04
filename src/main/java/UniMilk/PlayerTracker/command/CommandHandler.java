@@ -68,7 +68,7 @@ public class CommandHandler implements CommandExecutor{
             // 没有参数时，查询所有在线玩家
             plugin.adventure().sender(sender).sendMessage(Component.text("===== 在线玩家信息 =====", NamedTextColor.GOLD));
             for (Player player : Bukkit.getOnlinePlayers()) {
-                PlayerStatusUtils.sendPlayerInfo(sender, player);
+                PlayerStatusUtils.sendPlayerInfo(sender, player, plugin);
             }
         } else {
             // 有参数时，查询特定玩家
@@ -78,7 +78,7 @@ public class CommandHandler implements CommandExecutor{
                     Component.text("玩家 " + args[1] + " 不在线或不存在！", NamedTextColor.RED)
                 );
             } else {
-                PlayerStatusUtils.sendPlayerInfo(sender, target);
+                PlayerStatusUtils.sendPlayerInfo(sender, target, plugin);
             }
         }
         return true;

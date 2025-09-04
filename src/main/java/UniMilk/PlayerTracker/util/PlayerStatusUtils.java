@@ -1,14 +1,16 @@
 package unimilk.playertracker.util;
 
+import unimilk.playertracker.*;
+
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.chat.hover.content.Text;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.format.NamedTextColor;
 
 public class PlayerStatusUtils {
     
@@ -33,7 +35,7 @@ public class PlayerStatusUtils {
         return String.format("%s %s %s", x, y, z);
     }
 
-    public static void sendPlayerInfo(CommandSender sender, Player player) {
+    public static void sendPlayerInfo(CommandSender sender, Player player, PlayerTracker plugin) {
         // 发送玩家信息函数
         Location loc = player.getLocation();
         String activity = getStatus(player);
@@ -41,27 +43,19 @@ public class PlayerStatusUtils {
         String coords = getCoords(player);
         
         // 主信息组件
-        TextComponent message = new TextComponent(
-            ChatColor.GREEN + player.getName() + ChatColor.YELLOW + " - 世界: " + ChatColor.AQUA + worldName + ChatColor.YELLOW + " - 坐标: [");
+        TextComponent message = Component.text(player.getName(), NamedTextColor.GREEN)
+            .append(Component.text(" - 世界: ").color(NamedTextColor.YELLOW))
+            .append(Component.text(worldName).color(NamedTextColor.AQUA))
+            .append(Component.text(" - 坐标: [").color(NamedTextColor.YELLOW))
+            .append(Component.text(coords).color(NamedTextColor.AQUA)
+                .hoverEvent(HoverEvent.showText(Component.text("点击复制坐标")))
+                .clickEvent(ClickEvent.copyToClipboard(coords))
+            .append(Component.text("] - 当前状态: ").color(NamedTextColor.YELLOW))
+            .append(Component.text(activity).color(NamedTextColor.LIGHT_PURPLE))
+            );
 
-        // 可点击的坐标组件
-        TextComponent coordComponent = new TextComponent(ChatColor.AQUA + coords);
-        coordComponent.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, coords));
-        coordComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("点击复制坐标")));
+        // 发送（必须是 Player 才能看到富文本）       
+        plugin.adventure().sender(sender).sendMessage(message);
 
-        // 当前状态信息
-        TextComponent statusComponent = new TextComponent(ChatColor.YELLOW + "] - 当前状态: " + ChatColor.LIGHT_PURPLE + activity);
-
-        // 拼接
-        message.addExtra(coordComponent);
-        message.addExtra(statusComponent);
-
-        // 发送（必须是 Player 才能看到富文本）
-        if (sender instanceof Player) {
-            ((Player) sender).spigot().sendMessage(message);
-        } else {
-            // 控制台无法显示富文本，输出纯文本版本
-            sender.sendMessage(ChatColor.GREEN + player.getName() + ChatColor.YELLOW + " - 世界: " + ChatColor.AQUA + worldName + ChatColor.YELLOW + " - 坐标: [" + ChatColor.AQUA + coords + ChatColor.YELLOW + "] - 当前状态: " + ChatColor.LIGHT_PURPLE + activity);
-        }
     }
 }
