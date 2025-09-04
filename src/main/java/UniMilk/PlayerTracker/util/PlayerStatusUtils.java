@@ -49,10 +49,9 @@ public class PlayerStatusUtils {
             .append(Component.text(" - 坐标: [").color(NamedTextColor.YELLOW))
             .append(Component.text(coords).color(NamedTextColor.AQUA)
                 .hoverEvent(HoverEvent.showText(Component.text("点击复制坐标")))
-                .clickEvent(ClickEvent.copyToClipboard(coords))
+                .clickEvent(ClickEvent.copyToClipboard(coords)))
             .append(Component.text("] - 当前状态: ").color(NamedTextColor.YELLOW))
-            .append(Component.text(activity).color(NamedTextColor.LIGHT_PURPLE))
-            );
+            .append(Component.text(activity).color(NamedTextColor.LIGHT_PURPLE));
 
         // 发送（必须是 Player 才能看到富文本）       
         plugin.adventure().sender(sender).sendMessage(message);
