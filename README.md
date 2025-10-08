@@ -1,10 +1,10 @@
-# 🧭 PlayerTracker 插件（适用于 Spigot/Paper 1.19.1）
-🚀 **PlayerTracker** 是一款 **Minecraft 1.19.1** 服务器插件，支持管理员查询在线玩家 **坐标和状态**.
+# 🧭 PlayerTracker 插件（适用于 Spigot/Paper 1.13.x ~ 1.21.x）
+🚀 **PlayerTracker** 是一款 **Minecraft 1.13.x ~ 1.21.x** 服务器插件，支持管理员查询在线玩家 **坐标和状态**.
 
-🚀 **PlayerTracker** is an esay-to-use plugin for **1.19.1 Minecraft servers**. Server ops are able to get to know **the coordinary and status** of online players.
+🚀 **PlayerTracker** is an esay-to-use plugin for **1.13.x ~ 1.21.x Minecraft servers**. Server ops are able to get to know **the coordinary and status** of online players.
 
-📌 **当前版本：`v3.3.1`**  
-📌 **兼容 Minecraft 版本：`1.19.1`**  
+📌 **当前版本：`v3.3.2`**  
+📌 **兼容 Minecraft 版本：`1.13.x ~ 1.21.x`**  
 📌 **支持服务端：`Spigot` `Paper`**
 
 ---
@@ -175,7 +175,7 @@ src/
 ### [3.3.2] - 2025-10-08
 
 ### 🌟 优化
-- 
+- 兼容了 `1.13.x ~ 1.21.x` 的游戏版本。
 
 ### 🛠 修复
 - 修复了 MC服务器版本 `1.13.x~1.18.x` 不能加载插件的问题。
