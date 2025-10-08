@@ -12,7 +12,8 @@
     <description>查询玩家坐标与状态的 Spigot 插件</description>
 
     <properties>
-        <java.version>17</java.version>  <!-- Spigot 1.19.1 需要 Java 17 -->
+        <!-- 使用 Java 17 编译 -->
+        <java.version>17</java.version>
         <spigot.version>1.19.1-R0.1-SNAPSHOT</spigot.version>
     </properties>
 
@@ -38,7 +39,7 @@
 
     <build>
         <plugins>
-            <!-- 确保使用 Java 18 进行编译 -->
+            <!-- 确保编译产物兼容 Java 8 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -46,7 +47,7 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <release>${java.version}</release>
+                    <release>8</release>
                 </configuration>
             </plugin>
 
