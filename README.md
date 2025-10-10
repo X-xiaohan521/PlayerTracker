@@ -1,10 +1,10 @@
-# 🧭 PlayerTracker Plugin（Capable for Spigot/Paper 1.13.x ~ 1.21.x）
+# 🧭 PlayerTracker Plugin (Capable for Spigot/Paper 1.13.x ~ 1.21.x)
 
 🌐 [English](./README.md) | [CN 中文](./README_zh-CN.md)
 
 🚀 **PlayerTracker** is a lightweight **Minecraft 1.13.x ~ 1.21.x server plugin** that allows administrators to **track the coordinates and status of online players**.
 
-
+## 📋 Overview
 📌 **Latest Version: `v3.3.2`**  
 📌 **Supported Minecraft Versions: `1.13.x ~ 1.21.x`**  
 📌 **Compatible Servers: `Spigot` `Paper`**
@@ -13,7 +13,7 @@
 
 ## 📥 Quick Start
 ### 1️⃣ Download
-🔹 [Click here to download **PlayerTracker**.](https://github.com/X-xiaohan521/PlayerTracker/releases/)
+👉  [Click here to download **PlayerTracker**.](https://github.com/X-xiaohan521/PlayerTracker/releases/)
 
 ### 2️⃣ Installation
 1. Download the `.jar` file.
@@ -46,25 +46,25 @@
     X_xiaohan521 - World: world - Position: [108 77 -105] - Status: Wandering
     Go_Karoo - World: world - Position: [247 62 -335] - Status: On Vehicle
     ```
-    ![alt text](image/sample1.png)
+    ![sample1](image/sample1.png)
     > 🚀 Players in game can click the coordinates in chat to **copy to clipboard**.
     
     To query a specific player, use `/pt track <player>`.
 2. #### Logging
-    When logging is enabled, player activities are automatically logged at `.\plugins\PlayerTracker\player_activities.log`. Refer to ["File Syntax"]() for an explanation of the logging syntax.
+    When logging is enabled, player activities are automatically logged at `.\plugins\PlayerTracker\player_activities.log`. Refer to ["File Syntax"](#-file-syntax) for an explanation of the logging syntax.
     
     **Players with `playertracker.admin` permission** or **server console** can toggle logging via `/pt log on/off`.
 3. #### Live Tracker `/pt viewer`
     **Players with `playertracker.view` permission** can issue `/pt viewer add <player>` in game to display real-time tracking info on-screen, for example:
-    ![alt text](image/sample2.png)
+    ![sample2](image/sample2.png)
     ```log
     Tracking: X_xiaohan521 - World: world - Position: [96 72 34] - Status: Wandering
     ```
-    ![alt text](image/sample3.png)
+    ![sample3](image/sample3.png)
     To stop tracking, use `/pt viewer remove`.
     
     Additionally, the **BossBar area** (on top of the screen) will show the relative direction and distance between the viewer and the target:
-    ![alt text](image/sample4.png)
+    ![sample4](image/sample4.png)
 
     - Horizontal Direction: `↑` `↗` `→` `↘` `↓` `↙` `←` `↖` (8 total)
     - Vertical Direction: `↑` `↓` `Level` (3 total)
@@ -77,7 +77,7 @@
 ---
 
 ## 📄 File Syntax
-### 🔹 Configuration File `config.yml`
+### ⚙️ Configuration File `config.yml`
 > 📌 Automatically generated at `.\plugins\PlayerTracker` on first launch.
 ```yml
 plugin:
@@ -88,7 +88,7 @@ log:
   schedule: 300   # Logging interval (seconds)
 ```
 
-### 🔹 Log File `player_activities.log`
+### 🧾 Log File `player_activities.log`
 > 📌 Automatically created at `.\plugins\PlayerTracker` when the first log entry is written.
 1. #### Sample Log Entry
     ```log
@@ -160,7 +160,7 @@ src/
 
 ---
 
-## 🔧 FAQ
+## ❓ FAQ
 - ### Q: Will the viewer be kept after a player quit?
   #### A: If it is the player who created the viewer quit, the viewer won't be kept, and you would have to re-add the viewer after rejoin. But if it is the target quit, the viewer will be reactivated once the target rejoin.
 - ### Q: Does the log file clean itself regularly?
@@ -186,10 +186,10 @@ src/
 
 ## 💡 Contributing
 ### Want to help improve this plugin? Submit an **Issue** or **Pull Request** via GitHub.
-- Report issues: [🔗 GitHub Issues](https://github.com/X-xiaohan521/PlayerTracker/issues)
-- Suggest new features: [🔗 GitHub Issues](https://github.com/X-xiaohan521/PlayerTracker/issues)
-- Join discussions: [🔗 Github discussions](https://github.com/X-xiaohan521/PlayerTracker/discussions/)
-- Contribute code: Fork and submit a [🔗 Pull Request](https://github.com/X-xiaohan521/PlayerTracker/pulls)
+- 🐛 Report issues: [🔗 GitHub Issues](https://github.com/X-xiaohan521/PlayerTracker/issues)
+- 💡 Suggest new features: [🔗 GitHub Issues](https://github.com/X-xiaohan521/PlayerTracker/issues)
+- 💬 Join discussions: [🔗 Github discussions](https://github.com/X-xiaohan521/PlayerTracker/discussions/)
+- 🧩 Contribute code: Fork and submit a [🔗 Pull Request](https://github.com/X-xiaohan521/PlayerTracker/pulls)
 
 ---
 
@@ -208,6 +208,6 @@ means.
 
 ---
 
-## 📌 Final Words
+## ⭐ Final Words
 ### Thank you for using **PlayerTracker**!
 If you find this plugin helpful, please star ⭐ ths repository or leave your feedback — your support means a lot to me! 🚀
