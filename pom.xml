@@ -5,7 +5,7 @@
     
     <groupId>unimilk.playertracker</groupId>
     <artifactId>PlayerTracker</artifactId>
-    <version>3.3.2</version>
+    <version>4.1.0</version>
     <packaging>pom</packaging>
 
     <name>PlayerTracker</name>
@@ -19,52 +19,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>spigotmc-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
-            <id>bukkit-repo</id>
-            <url>https://repo.bukkit.org/content/groups/public/</url>
-        </repository>
-    </repositories>
-
     <modules>
         <module>playertracker-api</module>
         <module>playertracker-common</module>
         <module>playertracker-v1_13_15</module>
         <module>playertracker-v1_16_21</module>
+        <module>playertracker-assembly</module>
     </modules>
-
-    <build>
-        <plugins>
-            <!-- 确保编译产物兼容 Java 8 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <release>8</release>
-                </configuration>
-            </plugin>
-
-            <!-- Maven Shade 插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 </project>

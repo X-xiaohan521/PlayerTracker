@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import unimilk.playertracker.command.CommandHandler;
 import unimilk.playertracker.command.CommandTabCompleter;
+import unimilk.playertracker.core.VersionManager;
 import unimilk.playertracker.log.*;
 import unimilk.playertracker.util.EventListener;
 import unimilk.playertracker.viewer.BossBarManager;
@@ -17,6 +18,7 @@ public class PlayerTracker extends JavaPlugin {
     private boolean isEnabled; // 初始化插件启用状态标识
     private FileConfiguration config; // 初始化配置文件对象
     private ActivityLogger logger; // 初始化活动记录器对象
+    private VersionManager versionManager; // 初始化反射管理器对象
     private TrackViewer viewer; // 初始化追踪器对象
     private CommandHandler commandHandler; // 初始化命令处理器对象
     private CommandTabCompleter commandTabCompleter; // 初始化Tab补全器对象
@@ -32,6 +34,9 @@ public class PlayerTracker extends JavaPlugin {
         
         // 加载活动记录器
         logger = new ActivityLogger(this); // 创建活动记录器实例
+
+        // 加载反射
+        versionManager = new VersionManager();
         
         // 加载BossBar管理器
         manager = new BossBarManager(); // 创建BossBar管理器实例
@@ -40,7 +45,7 @@ public class PlayerTracker extends JavaPlugin {
         viewer = new TrackViewer(manager); // 创建跟踪器实例
         
         // 加载命令处理器
-        commandHandler = new CommandHandler(this, viewer); // 创建命令处理器实例
+        commandHandler = new CommandHandler(this, viewer, versionManager.getMessageSender()); // 创建命令处理器实例
         this.getCommand("playertracker").setExecutor(commandHandler); // 注册命令处理器
 
         // 加载 Tab补全器

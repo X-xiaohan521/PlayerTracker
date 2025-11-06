@@ -5,7 +5,7 @@
 🚀 **PlayerTracker** is a lightweight **Minecraft 1.13.x ~ 1.21.x server plugin** that allows administrators to **track the coordinates and status of online players**.
 
 ## 📋 Overview
-📌 **Latest Version: `v3.3.2`**  
+📌 **Latest Version: `v4.1.0`**  
 📌 **Supported Minecraft Versions: `1.13.x ~ 1.21.x`**  
 📌 **Compatible Servers: `Spigot` `Paper`**
 
@@ -123,24 +123,49 @@ log:
 ## 🛠️ Technical Overview
 ### Plugin Structure
 ```less
-src/
-└── main/
-    └── java/
-        └── unimilk/
-            └── playertracker/
-                ├── PlayerTracker.java                 // Main Class
-                ├── command/
-                │   ├── CommandHandler.java              // Command Handler
-                │   └── CommandTabCompleter.java       // Tab Completer
-                ├── viewer/
-                │   ├── TrackViewer.java               // Track Manager
-                │   └── BossBarManager.java            // BossBar Manager
-                ├── log/
-                │   └── ActivityLogger.java            // Logging System
-                └── util/
-                    ├── PlayerStatusUtils.java         // Player Status Utility
-                    ├── DirectionDistanceCalc.java    // Direction & Distance Calculator
-                    └── EventListener.java            // Event Listener
+PlayerTracker/
+├── pom.xml                      # Parent aggregation POM
+│
+├── playertracker-api/           # Externally exposed API
+│   └── src/main/java/unimilk/playertracker/api/
+│       ├── viewer/
+│       │   ├── ITrackViewer.java
+│       │   └── IBossBarManager.java
+│       └── util/
+│           └── IMessageSender.java
+│
+├── playertracker-common/        # Common logic implementation, excluding version dependencies
+│   └── src/main/java/unimilk/playertracker/
+│       ├── PlayerTracker.java   # Plugin Main Class
+│       ├── command/
+│       │   ├── CommandHandler.java
+│       │   └── CommandTabCompleter.java
+│       ├── log/
+│       │   └── ActivityLogger.java
+│       ├── util/
+│       │   ├── DirectionDistanceCalc.java
+│       │   └── EventListener.java
+│       └── core/
+│           └── VersionManager.java    # Dynamically load different version implementations
+│
+├── playertracker-v1_13_15/      # Implementation dedicated to versions 1.13~1.15
+│   └── src/main/java/unimilk/playertracker/impl/v1_13_15/
+│       ├── viewer/
+│       │   ├── TrackViewerImpl.java
+│       │   └── BossBarManagerImpl.java
+│       └── util/
+│           └── MessageSenderImpl.java
+│
+├── playertracker-v1_16_21/      # Universal implementation for 1.16~1.21
+│   └── src/main/java/unimilk/playertracker/impl/v1_16_21/
+│       ├── viewer/
+│       │   ├── TrackViewerImpl.java
+│       │   └── BossBarManagerImpl.java
+│       └── util/
+│           └── MessageSenderImpl.java
+│
+└── playertracker-assembly/       # Final packaging module
+    └── src/main/resources/plugin.yml
 
 ```
 ### Data Structure
@@ -174,13 +199,15 @@ src/
 
 ## 📜 Changelog
 > 📌 Only the latest version is listed here. See `CHANGELOG.md` for older versions.
-### [3.3.2] - 2025-10-08
+### [4.1.0] - 2025-11-06
 
 ### 🌟 Improvements
 - Added compatibility for Minecraft `1.13.x ~ 1.21.x`.
+- Reconstruct plugin structure for better organization.
+- Added English `README.md`.
 
 ### 🛠 Bugfixes
-- Fixed plugin loading issues on servers of `1.13.x~1.18.x`.
+- Fixed plugin loading issues on servers of `1.13.x~1.15.x`.
 
 ---
 

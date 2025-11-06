@@ -1,11 +1,13 @@
 package unimilk.playertracker.core;
 
-import unimilk.playertracker.api.util.IPlayerStatusUtils;
+import unimilk.playertracker.api.util.IMessageSender;
 
 import org.bukkit.Bukkit;
 
 public class VersionManager {
-    public static void init() {
+    private IMessageSender messageSender;
+    
+    public VersionManager() {
         String version = Bukkit.getServer().getBukkitVersion();
         if (version.startsWith("1.13") || version.startsWith("1.14") ||
             version.startsWith("1.15")) {
@@ -15,19 +17,17 @@ public class VersionManager {
         }
     }
 
-    private static void loadImpl(String basePackage) {
-        // 使用反射或 ServiceLoader 动态加载实现类
-        String className = basePackage + ".util.PlayerStatusUtilsImpl";
+    private void loadImpl(String basePackage) {
+        // 使用反射动态加载实现类
+        String className = basePackage + ".util.MessageSenderImpl.java";
         try {
-            IPlayerStatusUtils utils = (IPlayerStatusUtils)
-            Class.forName(className).getDeclaredConstructor().newInstance();
+            this.messageSender = (IMessageSender) Class.forName(className).getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new RuntimeException("Cannot load version class: " + className, e);
         }
-
     }
 
-    public static IPlayerStatusUtils getPlayerStatusUtils() {
-        return playerStatusUtils;
+    public IMessageSender getMessageSender() {
+        return this.messageSender;
     }
 }

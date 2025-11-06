@@ -7,20 +7,21 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
-
-import unimilk.playertracker.PlayerTracker;
-import unimilk.playertracker.util.PlayerStatusUtils;
 import unimilk.playertracker.viewer.TrackViewer;
+import unimilk.playertracker.PlayerTracker;
+import unimilk.playertracker.api.util.*;
 
 
 public class CommandHandler implements CommandExecutor{
     private final PlayerTracker plugin; // 定义插件实例
     private final TrackViewer viewer;
+    private final IMessageSender messageSender;
 
-    public CommandHandler(PlayerTracker plugin, TrackViewer viewer) {
+    public CommandHandler(PlayerTracker plugin, TrackViewer viewer, IMessageSender messageSender) {
         // 构造函数，接收插件实例
         this.plugin = plugin; // 初始化插件实例
         this.viewer = viewer; // 初始化追踪器实例
+        this.messageSender = messageSender; // 初始化消息发送器实例
     }
 
     @Override
@@ -67,7 +68,7 @@ public class CommandHandler implements CommandExecutor{
             // 没有参数时，查询所有在线玩家
             sender.sendMessage(ChatColor.GOLD + "===== 在线玩家信息 =====");
             for (Player player : Bukkit.getOnlinePlayers()) {
-                PlayerStatusUtils.sendPlayerInfo(sender, player);
+                messageSender.sendPlayerInfo(sender, player);
             }
         } else {
             // 有参数时，查询特定玩家
@@ -75,7 +76,7 @@ public class CommandHandler implements CommandExecutor{
             if (target == null) {
                 sender.sendMessage(ChatColor.RED + "玩家 " + args[1] + " 不在线或不存在！");
             } else {
-                PlayerStatusUtils.sendPlayerInfo(sender, target);
+                messageSender.sendPlayerInfo(sender, target);
             }
         }
         return true;

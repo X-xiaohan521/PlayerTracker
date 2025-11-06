@@ -1,14 +1,10 @@
 package unimilk.playertracker.util;
 
 import org.bukkit.Location;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import unimilk.playertracker.api.util.IPlayerStatusUtils;
 
-public class PlayerStatusUtils {
-    private static IPlayerStatusUtils statusUtils;
-    
+public class PlayerStatusUtils {    
     public static String getStatus(Player player) {
         // 获取玩家当前活动状态函数
         if (player.isSleeping()) return "睡觉中";
@@ -28,10 +24,5 @@ public class PlayerStatusUtils {
         int y = loc.getBlockY(); // 获取玩家所在世界的Y坐标
         int z = loc.getBlockZ(); // 获取玩家所在世界的Z坐标
         return String.format("%s %s %s", x, y, z);
-    }
-
-    public static void sendPlayerInfo(CommandSender sender, Player player) {
-        // 调用 sendPlayerInfo 接口
-        statusUtils.sendPlayerInfo(sender, player);
     }
 }

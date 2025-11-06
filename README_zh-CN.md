@@ -4,7 +4,7 @@
 
 🚀 **PlayerTracker** 是一款 **Minecraft 1.13.x ~ 1.21.x** 服务器插件，支持管理员查询在线玩家 **坐标和状态**.
 
-📌 **当前版本：`v3.3.2`**  
+📌 **当前版本：`v4.1.0`**  
 📌 **兼容 Minecraft 版本：`1.13.x ~ 1.21.x`**  
 📌 **支持服务端：`Spigot` `Paper`**
 
@@ -124,24 +124,49 @@ log:
 ## 🛠️ 技术规范
 ### 插件架构
 ```less
-src/
-└── main/
-    └── java/
-        └── unimilk/
-            └── playertracker/
-                ├── PlayerTracker.java                 // 主类
-                ├── command/
-                │   ├── CommandHandler.java              // 命令处理器
-                │   └── CommandTabCompleter.java       // 命令补全器
-                ├── viewer/
-                │   ├── TrackViewer.java               // 追踪器
-                │   └── BossBarManager.java            // BossBar管理器
-                ├── log/
-                │   └── ActivityLogger.java            // 日志记录器
-                └── util/
-                    ├── PlayerStatusUtils.java         // 获取玩家状态工具
-                    ├── DirectionDistanceCalc.java    // 方向/距离计算工具
-                    └── EventListener.java            // 事件监听器
+PlayerTracker/
+├── pom.xml                      # 父级聚合 POM
+│
+├── playertracker-api/           # 对外暴露的接口（定义通用行为）
+│   └── src/main/java/unimilk/playertracker/api/
+│       ├── viewer/
+│       │   ├── ITrackViewer.java
+│       │   └── IBossBarManager.java
+│       └── util/
+│           └── IMessageSender.java
+│
+├── playertracker-common/        # 通用逻辑实现，不含版本依赖
+│   └── src/main/java/unimilk/playertracker/
+│       ├── PlayerTracker.java   # 插件主类
+│       ├── command/
+│       │   ├── CommandHandler.java
+│       │   └── CommandTabCompleter.java
+│       ├── log/
+│       │   └── ActivityLogger.java
+│       ├── util/
+│       │   ├── DirectionDistanceCalc.java
+│       │   └── EventListener.java
+│       └── core/
+│           └── VersionManager.java   # 动态加载不同版本实现
+│
+├── playertracker-v1_13_15/      # 1.13~1.15 专用实现
+│   └── src/main/java/unimilk/playertracker/impl/v1_13_15/
+│       ├── viewer/
+│       │   ├── TrackViewerImpl.java
+│       │   └── BossBarManagerImpl.java
+│       └── util/
+│           └── MessageSenderImpl.java
+│
+├── playertracker-v1_16_21/      # 1.16~1.21 通用实现
+│   └── src/main/java/unimilk/playertracker/impl/v1_16_21/
+│       ├── viewer/
+│       │   ├── TrackViewerImpl.java
+│       │   └── BossBarManagerImpl.java
+│       └── util/
+│           └── MessageSenderImpl.java
+│
+└── playertracker-assembly/      # 最终聚合打包模块
+    └── src/main/resources/plugin.yml
 
 ```
 ### 插件数据结构
@@ -175,13 +200,15 @@ src/
 
 ## 📜 更新日志
 > 📌此处只显示最新版本，更早版本详见 `CHANGELOG.md`
-### [3.3.2] - 2025-10-08
+### [4.1.0] - 2025-11-06
 
 ### 🌟 优化
 - 兼容了 `1.13.x ~ 1.21.x` 的游戏版本。
+- 重构了插件，方便后续开发。
+- 添加英语 `README.md`。
 
 ### 🛠 修复
-- 修复了 MC服务器版本 `1.13.x~1.18.x` 不能加载插件的问题。
+- 修复了 MC服务器版本 `1.13.x~1.15.x` 不能加载插件的问题。
 
 ---
 
