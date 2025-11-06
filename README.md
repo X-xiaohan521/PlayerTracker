@@ -51,7 +51,7 @@
     
     To query a specific player, use `/pt track <player>`.
 2. #### Logging
-    When logging is enabled, player activities are automatically logged at `.\plugins\PlayerTracker\player_activities.log`. Refer to ["File Syntax"](#-file-syntax) for an explanation of the logging syntax.
+    When logging is enabled, player activities are automatically logged at `.\plugins\PlayerTracker\player_activities.log`. Refer to ["File Syntax"](#file-syntax) for an explanation of the logging syntax.
     
     **Players with `playertracker.admin` permission** or **server console** can toggle logging via `/pt log on/off`.
 3. #### Live Tracker `/pt viewer`

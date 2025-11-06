@@ -1,6 +1,0 @@
-plugin:
-  enabled: true
-
-log:
-  enabled: true
-  schedule: 300

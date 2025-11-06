@@ -10,5 +10,7 @@
         "unimilk"
     ],
     "java.compile.nullAnalysis.mode": "automatic",
-    "java.configuration.updateBuildConfiguration": "disabled"
+    "java.configuration.updateBuildConfiguration": "disabled",
+    "java.dependency.syncWithFolderExplorer": false,
+    "java.dependency.packagePresentation": "hierarchical"
 }

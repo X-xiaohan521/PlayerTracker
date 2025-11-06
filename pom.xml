@@ -2,19 +2,21 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>UniMilk</groupId>
+    
+    <groupId>unimilk.playertracker</groupId>
     <artifactId>PlayerTracker</artifactId>
     <version>3.3.2</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>PlayerTracker</name>
-    <description>查询玩家坐标与状态的 Spigot 插件</description>
+    <description>PlayerTracker is an esay-to-use plugin for ops in Minecraft servers to get to know the coordinary and status of online players.</description>
 
     <properties>
         <!-- 使用 Java 17 编译 -->
         <java.version>17</java.version>
-        <spigot.version>1.19.1-R0.1-SNAPSHOT</spigot.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <repositories>
@@ -28,14 +30,12 @@
         </repository>
     </repositories>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>${spigot.version}</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>playertracker-api</module>
+        <module>playertracker-common</module>
+        <module>playertracker-v1_13_15</module>
+        <module>playertracker-v1_16_21</module>
+    </modules>
 
     <build>
         <plugins>
