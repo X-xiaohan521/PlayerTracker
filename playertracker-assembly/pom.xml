@@ -1,0 +1,100 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>unimilk.playertracker</groupId>
+        <artifactId>PlayerTracker</artifactId>
+        <version>4.1.0</version>
+    </parent>
+
+    <artifactId>playertracker-assembly</artifactId>
+    <packaging>jar</packaging>
+    <name>PlayerTracker Assembly</name>
+
+    <dependencies>
+        <!-- 吸收所有模块 -->
+        <dependency>
+            <groupId>unimilk.playertracker</groupId>
+            <artifactId>playertracker-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>unimilk.playertracker</groupId>
+            <artifactId>playertracker-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>unimilk.playertracker</groupId>
+            <artifactId>playertracker-v1_13_15</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>unimilk.playertracker</groupId>
+            <artifactId>playertracker-v1_16_21</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <finalName>PlayerTracker</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <!-- Shade 合并所有模块 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.4.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <includes>
+                                    <include>unimilk.playertracker:*</include>
+                                </includes>
+                            </artifactSet>
+                            <filters>
+                                <filter>
+                                    <artifact>unimilk.playertracker:playertracker-api</artifact>
+                                    <includes>
+                                        <include>unimilk/playertracker/api/**</include>
+                                    </includes>
+                                </filter>
+                                <filter>
+                                    <artifact>unimilk.playertracker:playertracker-v1_13_15</artifact>
+                                    <excludes>
+                                        <exclude>unimilk/playertracker/api/**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>unimilk.playertracker:playertracker-v1_16_21</artifact>
+                                    <excludes>
+                                        <exclude>unimilk/playertracker/api/**</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <finalName>PlayerTracker-${project.version}</finalName>
+                            <outputDirectory>${project.basedir}/target</outputDirectory>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

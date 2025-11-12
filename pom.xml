@@ -2,67 +2,43 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>UniMilk</groupId>
+    
+    <groupId>unimilk.playertracker</groupId>
     <artifactId>PlayerTracker</artifactId>
-    <version>3.3.1</version>
-    <packaging>jar</packaging>
+    <version>4.1.0</version>
+    <packaging>pom</packaging>
 
     <name>PlayerTracker</name>
-    <description>查询玩家坐标与状态的 Spigot 插件</description>
+    <description>PlayerTracker is an esay-to-use plugin for ops in Minecraft servers to get to know the coordinary and status of online players.</description>
 
     <properties>
-        <java.version>17</java.version>  <!-- Spigot 1.19.1 需要 Java 17 -->
-        <spigot.version>1.19.1-R0.1-SNAPSHOT</spigot.version>
+        <!-- Set Java Version Here -->
+        <java.version>15</java.version>
+        <java.target.version>1.8</java.target.version>
+        <java.release.version>8</java.release.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>spigotmc-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
-            <id>bukkit-repo</id>
-            <url>https://repo.bukkit.org/content/groups/public/</url>
-        </repository>
-    </repositories>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>${spigot.version}</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>playertracker-api</module>
+        <module>playertracker-common</module>
+        <module>playertracker-v1_13_15</module>
+        <module>playertracker-v1_16_21</module>
+        <module>playertracker-assembly</module>
+    </modules>
 
     <build>
         <plugins>
-            <!-- 确保使用 Java 18 进行编译 -->
+            <!-- Make sure the target compatible with Java 8 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
                     <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <release>${java.version}</release>
+                    <target>${java.target.version}</target>
+                    <release>${java.release.version}</release>
                 </configuration>
-            </plugin>
-
-            <!-- Maven Shade 插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
