@@ -47,7 +47,7 @@
     Go_Karoo - World: world - Position: [247 62 -335] - Status: On Vehicle
     ```
     ![sample1](image/sample1.png)
-    > 🚀 Players in game can click the coordinates in chat to **copy to clipboard**.
+    > 🚀 Players in game can click the coordinates in chat to **copy to clipboard**. (Note that Minecraft versions 1.13.x ~ 1.15.x don't support this feature.)
     
     To query a specific player, use `/pt track <player>`.
 2. #### Logging
@@ -199,7 +199,7 @@ PlayerTracker/
 
 ## 📜 Changelog
 > 📌 Only the latest version is listed here. See `CHANGELOG.md` for older versions.
-### [4.1.0] - 2025-11-06
+### [4.1.0] - 2025-11-12
 
 ### 🌟 Improvements
 - Added compatibility for Minecraft `1.13.x ~ 1.21.x`.
@@ -208,6 +208,7 @@ PlayerTracker/
 
 ### 🛠 Bugfixes
 - Fixed plugin loading issues on servers of `1.13.x~1.15.x`.
+- Fixed bugs when issuing `/pt track` on servers of `1.13.x~1.15.x`.
 
 ---
 

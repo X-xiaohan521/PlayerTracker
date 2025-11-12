@@ -14,10 +14,6 @@ import unimilk.playertracker.api.util.IMessageSender;
 import unimilk.playertracker.util.PlayerStatusUtils;
 
 public class MessageSenderImpl implements IMessageSender {
-    public MessageSenderImpl() {
-
-    }
-
     public void sendPlayerInfo(CommandSender sender, Player player) {
         // 发送玩家信息函数
         Location loc = player.getLocation();
