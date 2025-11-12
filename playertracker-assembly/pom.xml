@@ -40,7 +40,7 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-
+    
     <build>
         <finalName>PlayerTracker</finalName>
         <resources>
@@ -51,18 +51,6 @@
         </resources>
 
         <plugins>
-            <!-- 确保编译产物兼容 Java 8 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>17</source>
-                    <target>1.8</target>
-                    <release>8</release>
-                </configuration>
-            </plugin>
-
             <!-- Shade 合并所有模块 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -80,6 +68,26 @@
                                     <include>unimilk.playertracker:*</include>
                                 </includes>
                             </artifactSet>
+                            <filters>
+                                <filter>
+                                    <artifact>unimilk.playertracker:playertracker-api</artifact>
+                                    <includes>
+                                        <include>unimilk/playertracker/api/**</include>
+                                    </includes>
+                                </filter>
+                                <filter>
+                                    <artifact>unimilk.playertracker:playertracker-v1_13_15</artifact>
+                                    <excludes>
+                                        <exclude>unimilk/playertracker/api/**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>unimilk.playertracker:playertracker-v1_16_21</artifact>
+                                    <excludes>
+                                        <exclude>unimilk/playertracker/api/**</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                             <finalName>PlayerTracker-${project.version}</finalName>
                             <outputDirectory>${project.basedir}/target</outputDirectory>
                             <createDependencyReducedPom>false</createDependencyReducedPom>

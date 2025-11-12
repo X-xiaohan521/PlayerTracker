@@ -12,10 +12,10 @@
     <description>PlayerTracker is an esay-to-use plugin for ops in Minecraft servers to get to know the coordinary and status of online players.</description>
 
     <properties>
-        <!-- 使用 Java 17 编译 -->
-        <java.version>17</java.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <!-- Set Java Version Here -->
+        <java.version>15</java.version>
+        <java.target.version>1.8</java.target.version>
+        <java.release.version>8</java.release.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -26,4 +26,20 @@
         <module>playertracker-v1_16_21</module>
         <module>playertracker-assembly</module>
     </modules>
+
+    <build>
+        <plugins>
+            <!-- Make sure the target compatible with Java 8 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.target.version}</target>
+                    <release>${java.release.version}</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

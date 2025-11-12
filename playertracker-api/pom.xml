@@ -14,12 +14,15 @@
     <packaging>jar</packaging>
 
     <name>PlayerTracker API</name>
+    <properties>
+        <spigot.version>1.13.1-R0.1-SNAPSHOT</spigot.version>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.13.1-R0.1-SNAPSHOT</version>
+            <version>${spigot.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

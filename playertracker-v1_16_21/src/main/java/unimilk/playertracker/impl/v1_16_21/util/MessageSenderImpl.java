@@ -9,9 +9,11 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
+
+import unimilk.playertracker.api.util.IMessageSender;
 import unimilk.playertracker.util.PlayerStatusUtils;
 
-public class MessageSenderImpl {
+public class MessageSenderImpl implements IMessageSender {
     public MessageSenderImpl() {
 
     }

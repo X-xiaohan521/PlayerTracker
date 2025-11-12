@@ -19,7 +19,7 @@ public class VersionManager {
 
     private void loadImpl(String basePackage) {
         // 使用反射动态加载实现类
-        String className = basePackage + ".util.MessageSenderImpl.java";
+        String className = basePackage + ".util.MessageSenderImpl";
         try {
             this.messageSender = (IMessageSender) Class.forName(className).getDeclaredConstructor().newInstance();
         } catch (Exception e) {

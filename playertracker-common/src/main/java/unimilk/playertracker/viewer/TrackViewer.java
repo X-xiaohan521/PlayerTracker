@@ -8,10 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.chat.hover.content.Text;
 import net.md_5.bungee.api.ChatColor;
 
 public class TrackViewer {
@@ -60,13 +57,10 @@ public class TrackViewer {
         // 主信息组件
         TextComponent message = new TextComponent(
             ChatColor.YELLOW + "正在追踪: " + ChatColor.GREEN + target.getName() +
-            ChatColor.YELLOW + " - 世界: " + ChatColor.AQUA + worldName +
-            ChatColor.YELLOW + " - 坐标: [");
+            ChatColor.YELLOW + " - 世界: " + ChatColor.AQUA + worldName);
         
-        // 可点击的坐标组件
+        // 坐标组件
         TextComponent coordComponent = new TextComponent(ChatColor.AQUA + coords);
-        coordComponent.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, coords));
-        coordComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("点击复制坐标")));
         message.addExtra(coordComponent);
 
         // 当前状态信息

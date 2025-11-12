@@ -15,7 +15,7 @@
 
     <name>PlayerTracker Common</name>
     <properties>
-        <spigot.version>1.19.1-R0.1-SNAPSHOT</spigot.version>
+        <spigot.version>1.13.1-R0.1-SNAPSHOT</spigot.version>
     </properties>
 
     <dependencies>
