@@ -57,17 +57,11 @@ public class TrackViewer {
         // 主信息组件
         TextComponent message = new TextComponent(
             ChatColor.YELLOW + "正在追踪: " + ChatColor.GREEN + target.getName() +
-            ChatColor.YELLOW + " - 世界: " + ChatColor.AQUA + worldName);
+            ChatColor.YELLOW + " - 世界: " + ChatColor.AQUA + worldName +
+            ChatColor.YELLOW + " - 坐标: [" + ChatColor.AQUA + coords + 
+            ChatColor.YELLOW + "] - 当前状态: " + ChatColor.LIGHT_PURPLE + activity);
         
-        // 坐标组件
-        TextComponent coordComponent = new TextComponent(ChatColor.AQUA + coords);
-        message.addExtra(coordComponent);
-
-        // 当前状态信息
-        TextComponent activityComponent = new TextComponent(ChatColor.YELLOW + "] - 当前状态: " + ChatColor.LIGHT_PURPLE + activity);
-        message.addExtra(activityComponent);
-
-        // 发送到追踪者的游戏画面上
+            // 发送到追踪者的游戏画面上
         tracker.spigot().sendMessage(ChatMessageType.ACTION_BAR, message);
     }
 
