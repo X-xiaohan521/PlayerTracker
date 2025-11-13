@@ -7,15 +7,21 @@ import org.bukkit.entity.Player;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 import unimilk.playertracker.api.util.IMessageSender;
-import unimilk.playertracker.util.PlayerStatusUtils;
+import unimilk.playertracker.util.PlayerStatusManager;
 
 public class MessageSenderImpl implements IMessageSender {
+    private final PlayerStatusManager playerStatusManager;
+
+    public MessageSenderImpl(PlayerStatusManager playerStatusManager) {
+        this.playerStatusManager = playerStatusManager;
+    }
+
     public void sendPlayerInfo(CommandSender sender, Player player) {
         // 发送玩家信息函数
         Location loc = player.getLocation();
-        String activity = PlayerStatusUtils.getStatus(player);
+        String activity = this.playerStatusManager.getStatus(player);
         String worldName = loc.getWorld().getName();
-        String coords = PlayerStatusUtils.getCoords(player);
+        String coords = this.playerStatusManager.getCoords(player);
         
         // 主信息组件（旧版本不支持鼠标悬停和点击事件，以 plain text 显示）
         TextComponent message = new TextComponent(

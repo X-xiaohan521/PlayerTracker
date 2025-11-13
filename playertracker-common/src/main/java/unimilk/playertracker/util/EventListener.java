@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.Location;
 
 import unimilk.playertracker.log.ActivityLogger;
@@ -22,11 +23,13 @@ public class EventListener implements Listener {
     // 事件监听器类，用于处理玩家活动事件
     private final ActivityLogger logger;
     private final TrackViewer viewer;
+    private final PlayerStatusManager playerStatusManager;
 
-    public EventListener(ActivityLogger logger, TrackViewer viewer) {
+    public EventListener(ActivityLogger logger, TrackViewer viewer, PlayerStatusManager playerStatusManager) {
         // 构造函数，接收活动记录器实例
         this.logger = logger;
         this.viewer = viewer;
+        this.playerStatusManager = playerStatusManager;
     }
     
     @EventHandler
@@ -64,6 +67,7 @@ public class EventListener implements Listener {
     public void onPlayerQuit(org.bukkit.event.player.PlayerQuitEvent event) {
         // 玩家离开游戏事件处理
         Player player = event.getPlayer();
+        playerStatusManager.clearEating(player);
         logger.log(player, "离开游戏");
     }
 
@@ -136,10 +140,34 @@ public class EventListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerEat(PlayerItemConsumeEvent event) {
-        // 玩家进食事件处理
+    public void onPlayerStartEating(PlayerInteractEvent event) {
+        // 玩家开始进食事件处理
+        switch (event.getAction().toString()) {
+            case "RIGHT_CLICK_AIR":
+                if (event.getItem().getType().isEdible()) {
+                    playerStatusManager.setEating(event.getPlayer(), true);
+                }
+            case "RIGHT_CLICK_BLOCK":
+                if (!event.isCancelled()) {return;}
+                if (event.getItem().getType().isEdible()) {
+                    playerStatusManager.setEating(event.getPlayer(), true);
+                }
+            default: return;
+        }
+    }
+
+    @EventHandler
+    public void onItemHeldChange(PlayerItemHeldEvent event) {
+        // 玩家进食打断事件处理
+        playerStatusManager.setEating(event.getPlayer(), false);
+    }
+
+    @EventHandler
+    public void onPlayerFinishedEating(PlayerItemConsumeEvent event) {
+        // 玩家结束进食事件处理
         if (event.getItem().getType().isEdible()) {
             Player player = (Player) event.getPlayer();
+            playerStatusManager.setEating(player, false);
             logger.log(player, "食用了：" + event.getItem().toString());
         }
     }

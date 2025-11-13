@@ -1,6 +1,6 @@
 package unimilk.playertracker.viewer;
 
-import unimilk.playertracker.util.PlayerStatusUtils;
+import unimilk.playertracker.util.PlayerStatusManager;
 
 import org.bukkit.entity.Player;
 
@@ -14,11 +14,13 @@ import net.md_5.bungee.api.ChatColor;
 public class TrackViewer {
     // 追踪查看器类，用于实时跟踪目标状态，并显示在追踪者游戏画面上
     private final BossBarManager manager;
+    private final PlayerStatusManager playerStatusManager;
     private Map<Player, Player> trackingMap = new HashMap<>(); // 用于存储追踪者和目标玩家之间的映射
 
-    public TrackViewer(BossBarManager manager) {
+    public TrackViewer(BossBarManager manager, PlayerStatusManager playerStatusManager) {
         // 构造函数，接收插件实例
         this.manager = manager; // 初始化BossBar管理器
+        this.playerStatusManager = playerStatusManager;
     }
 
     public void addTracker(Player tracker, Player target) {
@@ -45,13 +47,13 @@ public class TrackViewer {
         trackingMap.clear();
     }
 
-    public static void viewPlayerInfo(Player tracker, Player target) {
+    public void viewPlayerInfo(Player tracker, Player target) {
         // 将目标玩家信息显示在追踪者的游戏画面上
 
         // 获取信息
         String worldName = target.getWorld().getName(); // 获取目标玩家所在世界名称
-        String coords = PlayerStatusUtils.getCoords(target); // 获取目标玩家坐标
-        String activity = PlayerStatusUtils.getStatus(target); // 获取目标玩家当前活动状态
+        String coords = this.playerStatusManager.getCoords(target); // 获取目标玩家坐标
+        String activity = this.playerStatusManager.getStatus(target); // 获取目标玩家当前活动状态
 
         // 构建信息
         // 主信息组件

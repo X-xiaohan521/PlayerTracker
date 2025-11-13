@@ -10,6 +10,7 @@ import unimilk.playertracker.command.CommandTabCompleter;
 import unimilk.playertracker.core.VersionManager;
 import unimilk.playertracker.log.*;
 import unimilk.playertracker.util.EventListener;
+import unimilk.playertracker.util.PlayerStatusManager;
 import unimilk.playertracker.viewer.BossBarManager;
 import unimilk.playertracker.viewer.TrackViewer;
 
@@ -17,6 +18,7 @@ public class PlayerTracker extends JavaPlugin {
 
     private boolean isEnabled; // 初始化插件启用状态标识
     private FileConfiguration config; // 初始化配置文件对象
+    private PlayerStatusManager playerStatusManager; // 初始化玩家状态管理器对象
     private ActivityLogger logger; // 初始化活动记录器对象
     private VersionManager versionManager; // 初始化反射管理器对象
     private TrackViewer viewer; // 初始化追踪器对象
@@ -32,8 +34,11 @@ public class PlayerTracker extends JavaPlugin {
         // 加载配置文件
         isEnabled = loadConfig();
         
+        // 加载玩家状态管理器
+        playerStatusManager = new PlayerStatusManager();
+
         // 加载活动记录器
-        logger = new ActivityLogger(this); // 创建活动记录器实例
+        logger = new ActivityLogger(this, playerStatusManager); // 创建活动记录器实例
 
         // 加载反射
         versionManager = new VersionManager();
@@ -42,7 +47,7 @@ public class PlayerTracker extends JavaPlugin {
         manager = new BossBarManager(); // 创建BossBar管理器实例
         
         // 加载追踪器
-        viewer = new TrackViewer(manager); // 创建跟踪器实例
+        viewer = new TrackViewer(manager, playerStatusManager); // 创建跟踪器实例
         
         // 加载命令处理器
         commandHandler = new CommandHandler(this, viewer, versionManager.getMessageSender()); // 创建命令处理器实例
@@ -55,7 +60,7 @@ public class PlayerTracker extends JavaPlugin {
         if (isEnabled) {
             // 如果插件启用，则启动组件
             logger.scheduleLogging(); // 启动定时记录任务
-            getServer().getPluginManager().registerEvents(new EventListener(logger, viewer), this); // 注册事件监听器
+            getServer().getPluginManager().registerEvents(new EventListener(logger, viewer, playerStatusManager), this); // 注册事件监听器
         }
 
         getLogger().info("PlayerTracker 插件加载完毕！状态：" + (isEnabled ? "已启用" : "已禁用"));
@@ -113,7 +118,7 @@ public class PlayerTracker extends JavaPlugin {
         isEnabled = config.getBoolean("plugin.enabled");
         if (isEnabled) {
             logger.scheduleLogging(); // 重新启动定时记录任务
-            getServer().getPluginManager().registerEvents(new EventListener(logger, viewer), this); // 重新注册事件监听器
+            getServer().getPluginManager().registerEvents(new EventListener(logger, viewer, playerStatusManager), this); // 重新注册事件监听器
         }
 
         getLogger().info("PlayerTracker 插件已重新加载！状态：" + (isEnabled ? "已启用" : "已禁用"));

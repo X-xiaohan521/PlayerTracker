@@ -7,16 +7,18 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import unimilk.playertracker.PlayerTracker;
-import unimilk.playertracker.util.PlayerStatusUtils;
+import unimilk.playertracker.util.PlayerStatusManager;
 
 public class ActivityLogger {
     private final PlayerTracker plugin; // 定义插件对象
     private final File logFile; // 定义日志文件对象
+    private final PlayerStatusManager playerStatusManager;
 
-    public ActivityLogger(PlayerTracker plugin) {
+    public ActivityLogger(PlayerTracker plugin, PlayerStatusManager playerStatusManager) {
         // 构造函数，接收插件实例
         this.plugin = plugin; // 初始化插件实例
         this.logFile = new File(plugin.getDataFolder(), "player_activities.log"); // 日志文件路径
+        this.playerStatusManager = playerStatusManager;
     }
 
     public void log(Player player, String activity) {
@@ -28,7 +30,7 @@ public class ActivityLogger {
 
         // 构建日志（格式：时间 玩家名 位置【世界+坐标】 事件）
         String worldName = player.getWorld().getName();
-        String coords = PlayerStatusUtils.getCoords(player); // 获取玩家坐标
+        String coords = this.playerStatusManager.getCoords(player); // 获取玩家坐标
         String logMessage = String.format("[%s] [%s] [%s] [%s] [%s]", timeStamp, player.getName(), worldName, coords, activity); // 日志格式
 
         // 使用 try-catch 块处理 IOException 异常
@@ -44,7 +46,7 @@ public class ActivityLogger {
         int logInterval = plugin.getConfig().getInt("log.schedule", 300); // 获取日志记录间隔，默认为300秒
         plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
-                String activity = PlayerStatusUtils.getStatus(player); // 获取玩家活动状态
+                String activity = this.playerStatusManager.getStatus(player); // 获取玩家活动状态
                 log(player, activity); // 记录日志
             }
         }, 0L, logInterval * 20L); // 每隔指定时间记录一次活动
