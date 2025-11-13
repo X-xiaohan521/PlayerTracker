@@ -203,7 +203,7 @@ PlayerTracker/
 ### [4.2.0] - 2025-11-13
 
 ### 🆕 What's New
-- 
+- Added player eating status.
 
 ### 🌟 Improvements
 - 
