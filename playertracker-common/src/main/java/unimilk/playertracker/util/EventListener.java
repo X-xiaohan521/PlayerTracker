@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.Location;
 
 import unimilk.playertracker.log.ActivityLogger;
@@ -131,6 +132,15 @@ public class EventListener implements Listener {
         if (event.getInventory().getType() == InventoryType.CHEST) {
             Player player = (Player) event.getPlayer();
             logger.log(player, "打开了箱子"); // 记录打开箱子的事件
+        }
+    }
+
+    @EventHandler
+    public void onPlayerEat(PlayerItemConsumeEvent event) {
+        // 玩家进食事件处理
+        if (event.getItem().getType().isEdible()) {
+            Player player = (Player) event.getPlayer();
+            logger.log(player, "食用了：" + event.getItem().toString());
         }
     }
 }

@@ -5,7 +5,7 @@
     
     <groupId>unimilk.playertracker</groupId>
     <artifactId>PlayerTracker</artifactId>
-    <version>4.1.0</version>
+    <version>4.2.0</version>
     <packaging>pom</packaging>
 
     <name>PlayerTracker</name>

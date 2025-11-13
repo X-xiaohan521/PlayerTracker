@@ -5,7 +5,7 @@
 🚀 **PlayerTracker** is a lightweight **Minecraft 1.13.x ~ 1.21.x server plugin** that allows administrators to **track the coordinates and status of online players**.
 
 ## 📋 Overview
-📌 **Latest Version: `v4.1.0`**  
+📌 **Latest Version: `v4.2.0`**  
 📌 **Supported Minecraft Versions: `1.13.x ~ 1.21.x`**  
 📌 **Compatible Servers: `Spigot` `Paper`**
 
@@ -117,6 +117,7 @@ log:
     - Ender pearl usage
     - Player attack
     - Chet opening
+    - Eat Food
 
 ---
 
@@ -199,16 +200,16 @@ PlayerTracker/
 
 ## 📜 Changelog
 > 📌 Only the latest version is listed here. See `CHANGELOG.md` for older versions.
-### [4.1.0] - 2025-11-12
+### [4.2.0] - 2025-11-13
+
+### 🆕 What's New
+- 
 
 ### 🌟 Improvements
-- Added compatibility for Minecraft `1.13.x ~ 1.21.x`.
-- Reconstruct plugin structure for better organization.
-- Added English `README.md`.
+- 
 
 ### 🛠 Bugfixes
-- Fixed plugin loading issues on servers of `1.13.x~1.15.x`.
-- Fixed bugs when issuing `/pt track` on servers of `1.13.x~1.15.x`.
+- 
 
 ---
 
