@@ -106,6 +106,7 @@ log:
     - Sprinting
     - Sneaking
     - Wandering
+    - Is Eating
   
     b. Specific Events
     > 📌 The following events automatically trigger logging:
