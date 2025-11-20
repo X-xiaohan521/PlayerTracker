@@ -18,31 +18,31 @@ public class TrackViewer {
     private Map<Player, Player> trackingMap = new HashMap<>(); // 用于存储追踪者和目标玩家之间的映射
 
     public TrackViewer(BossBarManager manager, PlayerStatusManager playerStatusManager) {
-        // 构造函数，接收插件实例
+        // 构造方法，接收插件实例
         this.manager = manager; // 初始化BossBar管理器
         this.playerStatusManager = playerStatusManager;
     }
 
     public void addTracker(Player tracker, Player target) {
-        // 添加追踪器函数
+        // 添加追踪器方法
         trackingMap.put(tracker, target);
         manager.removeBossBar(tracker);
         manager.addBossBar(tracker, BossBarManager.generateBossBarTitle(tracker, target));
     }
 
     public Player removeTracker(Player tracker) {
-        // 移除追踪器函数
+        // 移除追踪器方法
         manager.removeBossBar(tracker);
         return trackingMap.remove(tracker);
     }
 
     public Player getTarget(Player tracker) {
-        // 获取追踪关系函数
+        // 获取追踪关系方法
         return trackingMap.get(tracker);
     }
 
     public void removeAllTracker() {
-        // 清空所有追踪器函数
+        // 清空所有追踪器方法
         manager.removeAllBossBar();
         trackingMap.clear();
     }
@@ -68,7 +68,7 @@ public class TrackViewer {
     }
 
     public void refreshTracker(Player player) {
-        // 更新追踪状态函数
+        // 更新追踪状态方法
         for (Map.Entry<Player, Player> entry : trackingMap.entrySet()) {
             Player tracker = entry.getKey(); // 获取追踪者
             Player target = entry.getValue(); // 获取目标玩家

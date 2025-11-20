@@ -15,14 +15,14 @@ public class ActivityLogger {
     private final PlayerStatusManager playerStatusManager;
 
     public ActivityLogger(PlayerTracker plugin, PlayerStatusManager playerStatusManager) {
-        // 构造函数，接收插件实例
+        // 构造方法，接收插件实例
         this.plugin = plugin; // 初始化插件实例
         this.logFile = new File(plugin.getDataFolder(), "player_activities.log"); // 日志文件路径
         this.playerStatusManager = playerStatusManager;
     }
 
     public void log(Player player, String activity) {
-        // 日志记录函数
+        // 日志记录方法
         if (!plugin.getConfig().getBoolean("log.enabled")) return; // 如果日志记录未启用，则返回
         
         // 获取当前时间并格式化
@@ -42,7 +42,7 @@ public class ActivityLogger {
     }
 
     public void scheduleLogging() {
-        // 定时记录玩家活动函数
+        // 定时记录玩家活动方法
         int logInterval = plugin.getConfig().getInt("log.schedule", 300); // 获取日志记录间隔，默认为300秒
         plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
@@ -54,7 +54,7 @@ public class ActivityLogger {
 
     /*
     private void scheduleLogCleanup() {
-        // 定时清理日志文件函数
+        // 定时清理日志文件方法
         Bukkit.getScheduler().runTaskTimer(this, () -> {
             File logFile = new File(getDataFolder(), "player_activities.log"); // 日志文件路径
             if (logFile.exists()) {

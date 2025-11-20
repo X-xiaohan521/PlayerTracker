@@ -7,13 +7,17 @@ import org.bukkit.entity.Player;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 import unimilk.playertracker.api.util.IMessageSender;
-import unimilk.playertracker.util.PlayerStatusManager;
+import unimilk.playertracker.api.util.IPlayerStatusManager;
 
 public class MessageSenderImpl implements IMessageSender {
-    private final PlayerStatusManager playerStatusManager;
+    private final IPlayerStatusManager playerStatusManager;
 
-    public MessageSenderImpl(PlayerStatusManager playerStatusManager) {
+    private MessageSenderImpl(IPlayerStatusManager playerStatusManager) {
         this.playerStatusManager = playerStatusManager;
+    }
+
+    public static IMessageSender newMessageSender(IPlayerStatusManager playerStatusManager) {
+        return new MessageSenderImpl(playerStatusManager);
     }
 
     public void sendPlayerInfo(CommandSender sender, Player player) {

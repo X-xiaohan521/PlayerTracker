@@ -11,13 +11,17 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 
 import unimilk.playertracker.api.util.IMessageSender;
-import unimilk.playertracker.util.PlayerStatusManager;
+import unimilk.playertracker.api.util.IPlayerStatusManager;
 
 public class MessageSenderImpl implements IMessageSender {
-    private final PlayerStatusManager playerStatusManager;
+    private IPlayerStatusManager playerStatusManager;
 
-    public MessageSenderImpl(PlayerStatusManager playerStatusManager) {
+    private MessageSenderImpl(IPlayerStatusManager playerStatusManager) {
         this.playerStatusManager = playerStatusManager;
+    }
+
+    public static IMessageSender newMessageSender(IPlayerStatusManager playerStatusManager) {
+        return new MessageSenderImpl(playerStatusManager);
     }
 
     public void sendPlayerInfo(CommandSender sender, Player player) {

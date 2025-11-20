@@ -6,13 +6,15 @@ import java.util.Map;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-public class PlayerStatusManager {
+import unimilk.playertracker.api.util.IPlayerStatusManager;
+
+public class PlayerStatusManager implements IPlayerStatusManager {
     private Map<Player, Boolean> eatingMap = new HashMap<>();
     
     public PlayerStatusManager() {}
 
     public String getStatus(Player player) {
-        // 获取玩家当前活动状态函数
+        // 获取玩家当前活动状态方法
         if (this.isEating(player)) return "进食中";
         if (player.isSleeping()) return "睡觉中";
         if (player.isInsideVehicle()) return "乘坐载具";
@@ -37,7 +39,7 @@ public class PlayerStatusManager {
     }
 
     public String getCoords(Player player) {
-        // 获取玩家坐标函数
+        // 获取玩家坐标方法
         Location loc = player.getLocation();
         int x = loc.getBlockX(); // 获取玩家所在世界的X坐标
         int y = loc.getBlockY(); // 获取玩家所在世界的Y坐标
