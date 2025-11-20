@@ -1,6 +1,6 @@
+C:\Users\dujin\Documents\Code\PlayerTracker\playertracker-common\src\main\java\unimilk\playertracker\status\PlayingWith.java
 C:\Users\dujin\Documents\Code\PlayerTracker\playertracker-common\src\main\java\unimilk\playertracker\util\EventListener.java
 C:\Users\dujin\Documents\Code\PlayerTracker\playertracker-common\src\main\java\unimilk\playertracker\util\DirectionDistanceCalc.java
-C:\Users\dujin\Documents\Code\PlayerTracker\playertracker-common\src\main\java\unimilk\playertracker\util\PlayerStatusManager.java
 C:\Users\dujin\Documents\Code\PlayerTracker\playertracker-common\src\main\java\unimilk\playertracker\viewer\BossBarManager.java
 C:\Users\dujin\Documents\Code\PlayerTracker\playertracker-common\src\main\java\unimilk\playertracker\log\ActivityLogger.java
 C:\Users\dujin\Documents\Code\PlayerTracker\playertracker-common\src\main\java\unimilk\playertracker\PlayerTracker.java
@@ -8,3 +8,4 @@ C:\Users\dujin\Documents\Code\PlayerTracker\playertracker-common\src\main\java\u
 C:\Users\dujin\Documents\Code\PlayerTracker\playertracker-common\src\main\java\unimilk\playertracker\core\VersionManager.java
 C:\Users\dujin\Documents\Code\PlayerTracker\playertracker-common\src\main\java\unimilk\playertracker\viewer\TrackViewer.java
 C:\Users\dujin\Documents\Code\PlayerTracker\playertracker-common\src\main\java\unimilk\playertracker\command\CommandHandler.java
+C:\Users\dujin\Documents\Code\PlayerTracker\playertracker-common\src\main\java\unimilk\playertracker\status\PlayerStatusManager.java

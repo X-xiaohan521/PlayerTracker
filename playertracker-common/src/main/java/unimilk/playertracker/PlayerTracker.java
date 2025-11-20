@@ -9,8 +9,8 @@ import unimilk.playertracker.command.CommandHandler;
 import unimilk.playertracker.command.CommandTabCompleter;
 import unimilk.playertracker.core.VersionManager;
 import unimilk.playertracker.log.*;
+import unimilk.playertracker.status.PlayerStatusManager;
 import unimilk.playertracker.util.EventListener;
-import unimilk.playertracker.util.PlayerStatusManager;
 import unimilk.playertracker.viewer.BossBarManager;
 import unimilk.playertracker.viewer.TrackViewer;
 
@@ -60,7 +60,10 @@ public class PlayerTracker extends JavaPlugin {
         if (isEnabled) {
             // 如果插件启用，则启动组件
             logger.scheduleLogging(); // 启动定时记录任务
-            getServer().getPluginManager().registerEvents(new EventListener(logger, viewer, playerStatusManager), this); // 注册事件监听器
+
+            // 注册事件监听器
+            getServer().getPluginManager().registerEvents(new EventListener(logger, viewer, playerStatusManager), this);
+            getServer().getPluginManager().registerEvents(versionManager.getCatListener(), this);
         }
 
         getLogger().info("PlayerTracker 插件加载完毕！状态：" + (isEnabled ? "已启用" : "已禁用"));

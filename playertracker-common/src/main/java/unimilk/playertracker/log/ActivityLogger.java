@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import unimilk.playertracker.PlayerTracker;
-import unimilk.playertracker.util.PlayerStatusManager;
+import unimilk.playertracker.status.PlayerStatusManager;
 
 public class ActivityLogger {
     private final PlayerTracker plugin; // 定义插件对象

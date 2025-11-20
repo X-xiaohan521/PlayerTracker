@@ -17,6 +17,7 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.Location;
 
 import unimilk.playertracker.log.ActivityLogger;
+import unimilk.playertracker.status.PlayerStatusManager;
 import unimilk.playertracker.viewer.TrackViewer;
 
 public class EventListener implements Listener {
@@ -171,4 +172,5 @@ public class EventListener implements Listener {
             logger.log(player, "食用了：" + event.getItem().toString());
         }
     }
+
 }

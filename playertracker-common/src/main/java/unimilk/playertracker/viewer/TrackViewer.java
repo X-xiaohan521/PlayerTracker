@@ -1,7 +1,5 @@
 package unimilk.playertracker.viewer;
 
-import unimilk.playertracker.util.PlayerStatusManager;
-
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -9,6 +7,7 @@ import java.util.Map;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import unimilk.playertracker.status.PlayerStatusManager;
 import net.md_5.bungee.api.ChatColor;
 
 public class TrackViewer {

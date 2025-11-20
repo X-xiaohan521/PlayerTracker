@@ -22,7 +22,8 @@
     <modules>
         <module>playertracker-api</module>
         <module>playertracker-common</module>
-        <module>playertracker-v1_13_15</module>
+        <module>playertracker-v1_13</module>
+        <module>playertracker-v1_14_15</module>
         <module>playertracker-v1_16_21</module>
         <module>playertracker-assembly</module>
     </modules>
