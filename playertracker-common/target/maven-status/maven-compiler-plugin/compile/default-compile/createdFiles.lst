@@ -1,6 +1,7 @@
 unimilk\playertracker\viewer\BossBarManager.class
 unimilk\playertracker\command\CommandTabCompleter.class
 unimilk\playertracker\util\DirectionDistanceCalc.class
+unimilk\playertracker\status\PlayerStatusManager$1.class
 unimilk\playertracker\status\PlayingWith.class
 unimilk\playertracker\core\VersionManager.class
 unimilk\playertracker\util\EventListener.class

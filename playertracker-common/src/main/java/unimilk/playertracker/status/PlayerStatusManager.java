@@ -4,15 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Tameable;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
+import unimilk.playertracker.PlayerTracker;
 import unimilk.playertracker.api.util.IPlayerStatusManager;
 
 public class PlayerStatusManager implements IPlayerStatusManager {
+    private final PlayerTracker plugin;
     private Map<Player, Boolean> eatingMap = new HashMap<>();
-    private Map<Player, PlayingWith> playingMap = new HashMap<>(); 
+    private Map<Player, PlayingWith> playingMap = new HashMap<>();
     
-    public PlayerStatusManager() {}
+    public PlayerStatusManager(PlayerTracker plugin) {
+        this.plugin = plugin;
+    }
 
     public String getStatus(Player player) {
         // 获取玩家当前活动状态方法
@@ -42,8 +50,9 @@ public class PlayerStatusManager implements IPlayerStatusManager {
         return eatingMap.getOrDefault(player, false);
     }
 
-    public void setPlaying(Player player, PlayingWith playingWith) {
+    public void setPlaying(Player player, PlayingWith playingWith, Tameable entity) {
         playingMap.put(player, playingWith);
+        startCheckingIfStillPlaying(entity, player);
     }
 
     public void clearPlaying(Player player) {
@@ -52,6 +61,24 @@ public class PlayerStatusManager implements IPlayerStatusManager {
 
     public PlayingWith isPlayingWith(Player player) {
         return playingMap.getOrDefault(player, null);
+    }
+
+    private BukkitTask startCheckingIfStillPlaying(Entity entity, Player player) {
+        BukkitTask checkIfStillPlaying = new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (!entity.isValid() || !player.isOnline()) {
+                    clearPlaying(player);
+                    cancel();
+                }
+
+                if (entity.getLocation().distance(player.getLocation()) > 10) {
+                    clearPlaying(player);
+                    cancel();
+                }
+            }
+        }.runTaskTimer(plugin, 0L, 20L);
+        return checkIfStillPlaying;
     }
 
     public String getCoords(Player player) {

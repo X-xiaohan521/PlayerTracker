@@ -35,7 +35,7 @@ public class PlayerTracker extends JavaPlugin {
         isEnabled = loadConfig();
         
         // 加载玩家状态管理器
-        playerStatusManager = new PlayerStatusManager();
+        playerStatusManager = new PlayerStatusManager(this);
 
         // 加载活动记录器
         logger = new ActivityLogger(this, playerStatusManager); // 创建活动记录器实例
