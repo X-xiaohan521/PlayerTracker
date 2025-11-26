@@ -1,4 +1,4 @@
-package unimilk.playertracker.impl.v1_13.util;
+package unimilk.playertracker.impl.v1_14_15.util;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -6,9 +6,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
+import unimilk.playertracker.api.util.ICatListener;
 import unimilk.playertracker.status.PlayerStatusManager;
 import unimilk.playertracker.status.PlayingWith;
-import unimilk.playertracker.api.util.ICatListener;
 
 public class CatListenerImpl implements ICatListener {
     private final PlayerStatusManager playerStatusManager;
@@ -24,7 +24,7 @@ public class CatListenerImpl implements ICatListener {
         if (!playerStatusManager.isPlayingWith(player).equals(null)) {
             return;
         }
-        if (entity.getType().equals(EntityType.OCELOT)) {
+        if (entity.getType().equals(EntityType.CAT)) {
             playerStatusManager.setPlaying(event.getPlayer(), PlayingWith.CAT, (Tameable)entity);
         } else if (entity.getType().equals(EntityType.WOLF)) {
             playerStatusManager.setPlaying(event.getPlayer(), PlayingWith.DOG, (Tameable)entity);
@@ -32,5 +32,5 @@ public class CatListenerImpl implements ICatListener {
             playerStatusManager.setPlaying(event.getPlayer(), PlayingWith.PARROT, (Tameable)entity);
         }
     }
-
+    
 }
