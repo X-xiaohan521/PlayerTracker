@@ -25,9 +25,9 @@ public class PlayerStatusManager implements IPlayerStatusManager {
     public String getStatus(Player player) {
         // 获取玩家当前活动状态方法
         if (this.isEating(player)) return "进食中";
-        if (this.isPlayingWith(player).equals(PlayingWith.CAT)) return "在和小猫玩";
-        if (this.isPlayingWith(player).equals(PlayingWith.DOG)) return "在和小狗玩";
-        if (this.isPlayingWith(player).equals(PlayingWith.PARROT)) return "在和小鹦鹉玩";
+        if (PlayingWith.CAT.equals(this.isPlayingWith(player))) return "在和小猫玩";
+        if (PlayingWith.DOG.equals(this.isPlayingWith(player))) return "在和小狗玩";
+        if (PlayingWith.PARROT.equals(this.isPlayingWith(player))) return "在和小鹦鹉玩";
         if (player.isSleeping()) return "睡觉中";
         if (player.isInsideVehicle()) return "乘坐载具";
         if (player.isSwimming()) return "游泳";
@@ -60,7 +60,7 @@ public class PlayerStatusManager implements IPlayerStatusManager {
     }
 
     public PlayingWith isPlayingWith(Player player) {
-        return playingMap.getOrDefault(player, null);
+        return playingMap.getOrDefault(player, PlayingWith.NOTHING);
     }
 
     private BukkitTask startCheckingIfStillPlaying(Entity entity, Player player) {

@@ -21,7 +21,7 @@ public class CatListenerImpl implements ICatListener {
     public void onPlayingWithPets(PlayerInteractEntityEvent event) {
         Player player = event.getPlayer();
         Entity entity = event.getRightClicked();
-        if (!playerStatusManager.isPlayingWith(player).equals(null)) {
+        if (!playerStatusManager.isPlayingWith(player).equals(PlayingWith.NOTHING)) {
             return;
         }
         if (entity.getType().equals(EntityType.CAT)) {
