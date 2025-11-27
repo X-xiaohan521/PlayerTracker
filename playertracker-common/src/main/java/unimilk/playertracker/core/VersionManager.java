@@ -3,11 +3,13 @@ package unimilk.playertracker.core;
 import unimilk.playertracker.api.util.ICatListener;
 import unimilk.playertracker.api.util.IMessageSender;
 import unimilk.playertracker.api.util.IPlayerStatusManager;
+import unimilk.playertracker.log.ActivityLogger;
 import unimilk.playertracker.status.PlayerStatusManager;
 
 import org.bukkit.Bukkit;
 
 public class VersionManager {
+    private ActivityLogger logger;
     private IMessageSender messageSender;
     private PlayerStatusManager playerStatusManager;
     private ICatListener catListener;
@@ -24,6 +26,10 @@ public class VersionManager {
         }
     }
 
+    public void setActivityLogger(ActivityLogger logger) {
+        this.logger = logger;
+    }
+
     private void loadImpl(String basePackage) {
         // 使用反射动态加载 MessageSender
         String classNameOfMessageSender = basePackage + ".util.MessageSenderImpl";
@@ -36,7 +42,7 @@ public class VersionManager {
         // 使用反射动态加载 CatListener
         String classNameOfCatListener = basePackage + ".util.CatListenerImpl";
         try {
-            this.catListener = (ICatListener) Class.forName(classNameOfCatListener).getConstructor(PlayerStatusManager.class).newInstance(playerStatusManager);
+            this.catListener = (ICatListener) Class.forName(classNameOfCatListener).getConstructor(PlayerStatusManager.class, ActivityLogger.class).newInstance(playerStatusManager, logger);
         } catch (Exception e) {
             throw new RuntimeException("Cannot load version class: " + classNameOfCatListener, e);
         }

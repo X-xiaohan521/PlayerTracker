@@ -12,14 +12,20 @@ import org.bukkit.scheduler.BukkitTask;
 
 import unimilk.playertracker.PlayerTracker;
 import unimilk.playertracker.api.util.IPlayerStatusManager;
+import unimilk.playertracker.log.ActivityLogger;
 
 public class PlayerStatusManager implements IPlayerStatusManager {
     private final PlayerTracker plugin;
+    private ActivityLogger logger;
     private Map<Player, Boolean> eatingMap = new HashMap<>();
     private Map<Player, PlayingWith> playingMap = new HashMap<>();
     
     public PlayerStatusManager(PlayerTracker plugin) {
         this.plugin = plugin;
+    }
+
+    public void setActivityLogger(ActivityLogger logger) {
+        this.logger = logger;
     }
 
     public String getStatus(Player player) {
@@ -55,8 +61,8 @@ public class PlayerStatusManager implements IPlayerStatusManager {
         startCheckingIfStillPlaying(entity, player);
     }
 
-    public void clearPlaying(Player player) {
-        playingMap.remove(player);
+    public PlayingWith clearPlaying(Player player) {
+        return playingMap.remove(player);
     }
 
     public PlayingWith isPlayingWith(Player player) {
@@ -68,12 +74,14 @@ public class PlayerStatusManager implements IPlayerStatusManager {
             @Override
             public void run() {
                 if (!entity.isValid() || !player.isOnline()) {
-                    clearPlaying(player);
+                    PlayingWith previousPlayingWith = clearPlaying(player);
+                    logger.log(player, "结束和 " + previousPlayingWith + " 玩");
                     cancel();
                 }
 
                 if (entity.getLocation().distance(player.getLocation()) > 10) {
-                    clearPlaying(player);
+                    PlayingWith previousPlayingWith = clearPlaying(player);
+                    logger.log(player, "结束和 " + previousPlayingWith + " 玩");
                     cancel();
                 }
             }

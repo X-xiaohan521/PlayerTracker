@@ -39,9 +39,11 @@ public class PlayerTracker extends JavaPlugin {
 
         // 加载活动记录器
         logger = new ActivityLogger(this, playerStatusManager); // 创建活动记录器实例
+        playerStatusManager.setActivityLogger(logger);
 
         // 加载反射
         versionManager = new VersionManager(playerStatusManager);
+        versionManager.setActivityLogger(logger);
         
         // 加载BossBar管理器
         manager = new BossBarManager(); // 创建BossBar管理器实例
