@@ -29,14 +29,14 @@ public class CatListenerImpl implements ICatListener {
             return;
         }
         if (entity.getType().equals(EntityType.OCELOT)) {
-            playerStatusManager.setPlaying(event.getPlayer(), PlayingWith.CAT, (Tameable)entity);
             logger.log(player, "开始和 " + PlayingWith.CAT + " 玩");
+            playerStatusManager.setPlaying(event.getPlayer(), PlayingWith.CAT, (Tameable)entity);
         } else if (entity.getType().equals(EntityType.WOLF)) {
-            playerStatusManager.setPlaying(event.getPlayer(), PlayingWith.DOG, (Tameable)entity);
             logger.log(player, "开始和 " + PlayingWith.DOG + " 玩");
+            playerStatusManager.setPlaying(event.getPlayer(), PlayingWith.DOG, (Tameable)entity);
         } else if (entity.getType().equals(EntityType.PARROT)) {
-            playerStatusManager.setPlaying(event.getPlayer(), PlayingWith.PARROT, (Tameable)entity);
             logger.log(player, "开始和 " + PlayingWith.PARROT + " 玩");
+            playerStatusManager.setPlaying(event.getPlayer(), PlayingWith.PARROT, (Tameable)entity);
         }
     }
 

@@ -14,7 +14,8 @@ public class VersionManager {
     private PlayerStatusManager playerStatusManager;
     private ICatListener catListener;
     
-    public VersionManager(PlayerStatusManager playerStatusManager) {
+    public VersionManager(PlayerStatusManager playerStatusManager, ActivityLogger logger) {
+        this.logger = logger;
         this.playerStatusManager = playerStatusManager;
         String version = Bukkit.getServer().getBukkitVersion();
         if (version.startsWith("1.13")) {
@@ -24,10 +25,6 @@ public class VersionManager {
         } else {
             loadImpl("unimilk.playertracker.impl.v1_16_21");
         }
-    }
-
-    public void setActivityLogger(ActivityLogger logger) {
-        this.logger = logger;
     }
 
     private void loadImpl(String basePackage) {
